@@ -1,0 +1,85 @@
+/* src/app/sidenav/sidenav.component.css */
+
+/* The side navigation menu */
+.sidenav {
+    height: 100%;
+    /* Full-height */
+    width: 0;
+    /* Initially, the width is set to 0 */
+    position: fixed;
+    /* Fixed position */
+    z-index: 1;
+    /* Stay on top */
+    top: 0;
+    left: 0;
+    background-color: #111;
+    /* Dark background color */
+    overflow-x: hidden;
+    /* Disable horizontal scroll */
+    transition: 0.5s;
+    /* Transition effect for sliding in the sidenav */
+    padding-top: 60px;
+    /* Place content 60px from the top */
+    margin-top: 56px;
+    /* Adjust margin to account for the fixed navbar height */
+}
+
+/* Links inside the sidenav */
+.sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #f1f1f1;
+    /* Light color for links */
+    display: block;
+    transition: 0.3s;
+}
+
+/* When you mouse over the navigation links, change color */
+.sidenav a:hover {
+    color: #818181;
+    /* Slightly darker color on hover */
+}
+
+/* Position and style the close button (top right corner) */
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+/* Style for the open button */
+.openbtn {
+    font-size: 28px;
+    cursor: pointer;
+    background-color: #111;
+    /* Dark button */
+    color: #f1f1f1;
+    /* Light text color */
+    padding: 10px 15px;
+    border: none;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    z-index: 2;
+}
+
+/* Style for the main content */
+.main-content {
+    transition: margin-left .5s;
+    /* Transition effect for content shift */
+    padding: 16px;
+}
+
+/* When the sidenav is opened */
+#mySidenav.open {
+    width: 250px;
+    /* Set width to 250px */
+}
+
+/* When the sidenav is opened */
+#main.shift {
+    margin-left: 250px;
+}
