@@ -1,0 +1,76 @@
+<!-- get-items.component.html -->
+<!-- <div class="container mt-4">
+    <h2 class="text-center">Item List</h2>
+    <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
+    <div *ngIf="items.length === 0 && !errorMessage" class="text-center">
+      <p>No items available.</p>
+    </div>
+    <div class="row">
+      <div class="col-md-4" *ngFor="let item of items">
+        <div class="card mb-4 m-5">
+          <img [src]="item.image" class="card-img-top" alt="Item Image" />
+          <div class="card-body">
+            <h5 class="card-title">{{ item.item }}</h5>
+            <p class="card-text">Category: {{ item.category }}</p>
+            <p class="card-text">Price: {{ item.price }}</p>
+            <p class="card-text" [ngClass]="{ 'text-success': item.available, 'text-danger': !item.available }">
+              {{ item.available ? 'Available' : 'Not Available' }}
+            </p>
+            <div class="text-center">
+                <button class="btn btn-outline-primary btn-sm m-1" (click)="updateMenu(item.id)">
+                  <i class="bi bi-pencil-square"></i> Edit
+                </button>
+                <button class="btn btn-outline-danger btn-sm m-1" (click)="deleteMenu(item.id)">
+                  <i class="bi bi-trash"></i> Delete
+                </button>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div> -->
+
+
+
+  <div>
+    <label for="category">Select Category:</label>
+    <select id="category" [(ngModel)]="selectedCategory" (change)="onCategoryChange(selectedCategory)">
+      <option value="">All</option>
+      <option *ngFor="let category of categories" [value]="category">
+        {{ category }}
+      </option>
+    </select>
+  </div>
+  
+  <div class="menu-items">
+    <div *ngFor="let item of items">
+      <div *ngIf="!selectedCategory || item.category === selectedCategory">
+        <div class="row">
+          <div class="col-md-4" *ngFor="let item of items">
+            <div class="card mb-4 m-5">
+              <img [src]="item.image" class="card-img-top" alt="Item Image" />
+              <div class="card-body">
+                <h5 class="card-title">{{ item.item }}</h5>
+                <p class="card-text">Category: {{ item.category }}</p>
+                <p class="card-text">Price: {{ item.price }}</p>
+                <p class="card-text" [ngClass]="{ 'text-success': item.available, 'text-danger': !item.available }">
+                  {{ item.available ? 'Available' : 'Not Available' }}
+                </p>
+                <div class="text-center">
+                    <button class="btn btn-outline-primary btn-sm m-1" (click)="updateMenu(item.id)">
+                      <i class="bi bi-pencil-square"></i> Edit
+                    </button>
+                    <button class="btn btn-outline-danger btn-sm m-1" (click)="deleteMenu(item.id)">
+                      <i class="bi bi-trash"></i> Delete
+                    </button>
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  
+

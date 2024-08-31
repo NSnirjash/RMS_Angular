@@ -1,0 +1,33 @@
+<!-- src/app/components/create-order/createorder.component.html -->
+<div class="create-order-container">
+    <h2>Create New Order</h2>
+    
+    <!-- Display the list of available items -->
+    <div *ngFor="let item of items" class="available-item-card">
+      <img [src]="item.image" alt="{{ item.item }}" class="item-image">
+      <h4>{{ item.item }}</h4>
+      <p>Category: {{ item.category }}</p>
+      <p>Price: ${{ item.price.toFixed(2) }}</p>
+      <button (click)="addToOrder(item)" class="btn btn-primary">Add to Cart</button>
+    </div>
+  
+    <!-- Display selected items and quantity input -->
+    <div *ngFor="let selectedItem of selectedItems" class="selected-item">
+      <h4>{{ selectedItem.item.item }}</h4>
+      <p>Price: ${{ selectedItem.item.price.toFixed(2) }}</p>
+      <label for="quantity-{{ selectedItem.item.id }}">Quantity:</label>
+      <input 
+        type="number" 
+        id="quantity-{{ selectedItem.item.id }}" 
+        [(ngModel)]="selectedItem.quantity" 
+        (ngModelChange)="changeQuantity(selectedItem.item, $event)" 
+        min="1">
+    </div>
+  
+    <!-- Display the total amount and create order button -->
+    <div class="order-summary">
+      <h4>Total Amount: ${{ totalAmount.toFixed(2) }}</h4>
+      <button (click)="createOrder()" class="btn btn-success">Create Order</button>
+    </div>
+  </div>
+  

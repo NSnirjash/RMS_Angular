@@ -1,0 +1,24 @@
+<div class="container mt-4">
+  <h2>My Orders</h2>
+  <div *ngIf="orders.length === 0" class="alert alert-info">No orders found.</div>
+  <div class="card mb-3" *ngFor="let order of orders">
+    <div class="card-body">
+      <h5 class="card-title">Order ID: {{ order.orderId }}</h5>
+      <p class="card-text"><strong>Date:</strong> {{ order.orderDate | date }}</p>
+      <p class="card-text"><strong>Total Amount:</strong> ${{ order.totalAmount }}</p>
+      <p class="card-text"><strong>Status:</strong> {{ order.status }}</p>
+      <ul class="list-group mb-2">
+        <li class="list-group-item" *ngFor="let item of order.items">
+          {{ item.item }} - ${{ item.price }} x {{ item.quantity }}
+        </li>
+      </ul>
+      <button class="btn btn-primary btn-sm" (click)="updateOrder(order.orderId)">
+        Update
+      </button>
+      <button class="btn btn-danger btn-sm" (click)="deleteOrder(order.orderId)">
+        Delete
+      </button>
+    </div>
+  </div>
+</div>
+
