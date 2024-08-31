@@ -4,4 +4,12 @@ export class CustomerModel {
     customerEmail !: string;
     customerCell !: string;
     customerAddress !: string;
+<<<<<<< Updated upstream
   }
+=======
+  }
+
+
+
+  
+>>>>>>> Stashed changes

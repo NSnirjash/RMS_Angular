@@ -2,8 +2,11 @@ import { Component } from '@angular/core';
 import { CustomerModel } from '../../model/customer.model';
 import { CustomerService } from '../../service/customer.service';
 import { Router } from '@angular/router';
+<<<<<<< Updated upstream
 import { HttpClient } from '@angular/common/http';
 import { FormBuilder, FormGroup } from '@angular/forms';
+=======
+>>>>>>> Stashed changes
 
 @Component({
   selector: 'app-createcustomer',
@@ -11,6 +14,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
   styleUrl: './createcustomer.component.css'
 })
 export class CreatecustomerComponent {
+<<<<<<< Updated upstream
   // customer: CustomerModel = new CustomerModel();
 
   // constructor(private customerService: CustomerService, private router: Router) {}
@@ -74,4 +78,19 @@ export class CreatecustomerComponent {
 
   }
 
+=======
+  customer: CustomerModel = new CustomerModel();
+
+  constructor(private customerService: CustomerService, 
+    private router: Router) {
+
+  }
+
+  onSubmit(): void {
+    this.customerService.createCustomer(this.customer).subscribe(() => {
+      alert('Customer created successfully');
+      this.router.navigate(['/customer']);
+    });
+  }
+>>>>>>> Stashed changes
 }

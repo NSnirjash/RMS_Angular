@@ -23,9 +23,15 @@
   "menu": [
     {
       "id": "1",
+<<<<<<< Updated upstream
       "item": "Cheese Burger",
       "category": "Fast Food",
       "price": 250,
+=======
+      "item": "Mutton Biryani",
+      "category": "Main Course",
+      "price": "250",
+>>>>>>> Stashed changes
       "image": "assets/CheeseBurger.jpg",
       "available": true
     },
@@ -316,6 +322,7 @@
   ],
   "customer": [
     {
+<<<<<<< Updated upstream
       "Id": "1",
       "customerName": "Stive Smith",
       "customerEmail": "stivesmith@gmail.com",
@@ -524,5 +531,88 @@
       "totalAmount": 940,
       "status": "Pending"
     }
+=======
+      "customerId": "1",
+      "customerName": "Stive Smith",
+      "customerEmail": "stivesmith@gmail.com",
+      "customerCell": "5551234",
+      "customerAddress": "789 Oak St, Springfield, IL"
+    },
+    {
+      "id": "8140",
+      "customerName": "Nasif Shahriyar Nirjash",
+      "customerEmail": "fdfas@fsd.dfd",
+      "customerCell": "85785875",
+      "customerAddress": "Agargaon"
+    },
+    {
+      "id": "b8eb",
+      "customerName": "Nasif Shahriyar Nirjash",
+      "customerEmail": "fdfas@fsd.dfd",
+      "customerCell": "85785875",
+      "customerAddress": "Agargaon"
+    },
+    {
+      "id": "c11b",
+      "customerName": "Nasif Shahriyar Nirjash",
+      "customerEmail": "fdfas@fsd.dfd",
+      "customerCell": "85785875",
+      "customerAddress": "Agargaon"
+    },
+    {
+      "id": "c59d",
+      "customerName": "Nasif Shahriyar Nirjash",
+      "customerEmail": "fdfas@fsd.dfd",
+      "customerCell": "85785875",
+      "customerAddress": "Agargaon"
+    },
+    {
+      "id": "b645",
+      "customerName": "Neyamul islam",
+      "customerEmail": "fdfas@fsd.dfd",
+      "customerCell": "8578587558",
+      "customerAddress": "Agargaon"
+    }
+  ],
+  "order": [
+    [
+      {
+        "orderId": "1",
+        "customer": [
+          {
+            "customerId": "1",
+            "customerName": "Stive Smith",
+            "customerEmaile": "stivesmith@gmail.com",
+            "customerCell": "5551234",
+            "customerAddress": "789 Oak St, Springfield, IL"
+          },
+          {
+            "table": [
+              {
+                "id": "2",
+                "name": "Table 2",
+                "capacity": "6",
+                "status": "reserved",
+                "reservationTime": "2024-08-26T21:08:44.385Z",
+                "isApproved": true
+              },
+              {
+                "menu": [
+                  {
+                    "id": "20",
+                    "item": "Pastries",
+                    "category": "Desserts",
+                    "price": 80,
+                    "image": "assets/Pastries.jpg",
+                    "available": true
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+>>>>>>> Stashed changes
   ]
 }

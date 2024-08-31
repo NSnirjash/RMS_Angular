@@ -19,6 +19,7 @@ import { RouterModule } from '@angular/router';
 import { ShowcustomerComponent } from './customer/showcustomer/showcustomer.component';
 import { CreatecustomerComponent } from './customer/createcustomer/createcustomer.component';
 import { UpdatecustomerComponent } from './customer/updatecustomer/updatecustomer.component';
+<<<<<<< Updated upstream
 import { ShoworderComponent } from './order/showorder/showorder.component';
 import { UpdateorderComponent } from './order/updateorder/updateorder.component';
 import { DeleteorderComponent } from './order/deleteorder/deleteorder.component';
@@ -28,6 +29,9 @@ import { RegistrationComponent } from './auth/registration/registration.componen
 import { LoginComponent } from './auth/login/login.component';
 import { LogoutComponent } from './auth/logout/logout.component';
 import { UserprofileComponent } from './userprofile/userprofile.component';
+=======
+import { DeletecustomerComponent } from './customer/deletecustomer/deletecustomer.component';
+>>>>>>> Stashed changes
 
 @NgModule({
   declarations: [
@@ -45,6 +49,7 @@ import { UserprofileComponent } from './userprofile/userprofile.component';
     ShowcustomerComponent,
     CreatecustomerComponent,
     UpdatecustomerComponent,
+<<<<<<< Updated upstream
     ShoworderComponent,
     UpdateorderComponent,
     DeleteorderComponent,
@@ -54,6 +59,9 @@ import { UserprofileComponent } from './userprofile/userprofile.component';
     LoginComponent,
     LogoutComponent,
     UserprofileComponent
+=======
+    DeletecustomerComponent
+>>>>>>> Stashed changes
   ],
   imports: [
     BrowserModule,

@@ -1,6 +1,7 @@
 <div class="container">
     <h2>Update Menu Item</h2>
     <form [formGroup]="updateForm" (ngSubmit)="updatemenu()">
+      <input type="hidden" formControlName="id">
       <div class="form-group">
         <label for="item">Item Name</label>
         <input type="text" id="item" class="form-control" formControlName="item" />

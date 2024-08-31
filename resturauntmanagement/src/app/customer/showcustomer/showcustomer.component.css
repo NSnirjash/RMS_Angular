@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 .container {
     max-width: 1100px;
   }
@@ -9,4 +10,26 @@
   button {
     margin-right: 5px;
   }
+=======
+.table {
+    width: 100%;
+    margin: auto;
+  }
+  
+  .btn {
+    margin-right: 5px;
+  }
+  .modal-content {
+    border-radius: 5px;
+  }
+  
+  .modal-header, .modal-footer {
+    border: none;
+  }
+  
+  .btn {
+    margin-right: 5px;
+  }
+  
+>>>>>>> Stashed changes
   
