@@ -16,7 +16,7 @@ export class ViewfoodComponent {
   selectedCategory: string = '';
   searchText: string = '';
 
-  constructor(private foodService: FoodService, router: Router) { }
+  constructor(private foodService: FoodService, private router: Router) { }
 
   ngOnInit(): void {
     this.getAllFoods();
@@ -54,6 +54,18 @@ export class ViewfoodComponent {
       );
     } else {
       this.filterByCategory();
+    }
+  }
+
+  onUpdate(food: FoodModel): void {
+    this.router.navigate(['/updatefood', food.id]);  // Navigate to update form with food ID
+  }
+
+  onDelete(id: number): void {
+    if (confirm('Are you sure you want to delete this food item?')) {
+      this.foodService.deleteFood(id).subscribe(() => {
+        this.getAllFoods();  // Reload food items after deletion
+      });
     }
   }
 
