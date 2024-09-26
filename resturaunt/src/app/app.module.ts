@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SavefoodComponent } from './food/savefood/savefood.component';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { provideHttpClient, withFetch } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, provideHttpClient, withFetch } from '@angular/common/http';
 import { NavbarComponent } from './nav/navbar/navbar.component';
 import { SidebarComponent } from './nav/sidebar/sidebar.component';
 import { FooterComponent } from './nav/footer/footer.component';
@@ -14,6 +14,9 @@ import { UpdatefoodComponent } from './food/updatefood/updatefood.component';
 import { SavetableComponent } from './table/savetable/savetable.component';
 import { ViewtableComponent } from './table/viewtable/viewtable.component';
 import { UpdatetableComponent } from './table/updatetable/updatetable.component';
+import { RegisterComponent } from './login/register/register.component';
+import { LoginComponent } from './login/login/login.component';
+import { TokenInterceptor } from './guards/TokenInterceptor';
 
 @NgModule({
   declarations: [
@@ -26,7 +29,9 @@ import { UpdatetableComponent } from './table/updatetable/updatetable.component'
     UpdatefoodComponent,
     SavetableComponent,
     ViewtableComponent,
-    UpdatetableComponent
+    UpdatetableComponent,
+    RegisterComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -38,7 +43,8 @@ import { UpdatetableComponent } from './table/updatetable/updatetable.component'
     provideClientHydration(),
     provideHttpClient(
       withFetch()
-    )
+    ),
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true}
   ],
   bootstrap: [AppComponent]
 })
