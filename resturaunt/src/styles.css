@@ -5,29 +5,6 @@ body {
     margin: 0;
   }
   
-  /* Navbar styling */
-  .navbar {
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
-  }
-  
-  .nav-link {
-    color: #fff !important;
-    transition: all 0.3s ease-in-out;
-  }
-  
-  .nav-link:hover {
-    color: #ffc107 !important;
-    transform: scale(1.1);
-  }
-  
-  .navbar-brand {
-    font-size: 1.5rem;
-    transition: transform 0.3s ease-in-out;
-  }
-  
-  .navbar-brand:hover {
-    transform: rotate(-5deg);
-  }
   
   /* Sidenav styling */
   .sidenav {

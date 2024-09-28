@@ -24,6 +24,7 @@ export class RegisterComponent {
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
       confirmPassword: ['', Validators.required],
+      role: ['', Validators.required],
       address: [''],
       phone: [''],
       image: ['']
@@ -37,27 +38,112 @@ export class RegisterComponent {
     return password === confirmPassword ? null : { mismatch: true };
   }
 
-  onSubmit() {
+  // register() {
+  //   if (this.registerForm.invalid) {
+  //     return;
+  //   }
+
+  //   const { name, email, password, address, phone, image } = this.registerForm.value;
+
+  //   this.authService.register({ name, email, password, address, phone, image }).subscribe(
+  //  {
+
+  //   next: AuthResponse => {
+  //     this.successMessage = 'Registration successful! Please check your email to activate your account.';
+  //     this.router.navigate(['/login']);
+  //   },
+  //   error:error => {
+  //     this.errorMessage = 'Registration failed. Please try again.';
+  //   }
+
+  //  }
+  //   );
+  // }
+
+  // registerAdmin() {
+  //   if (this.registerForm.invalid) {
+  //     return;
+  //   }
+
+  //   const { name, email, password, address, phone, image } = this.registerForm.value;
+
+  //   this.authService.registerAdmin({ name, email, password, address, phone, image }).subscribe(
+  //  {
+
+  //   next: AuthResponse => {
+  //     this.successMessage = 'Registration successful! Please check your email to activate your account.';
+  //     this.router.navigate(['/login']);
+  //   },
+  //   error:error => {
+  //     this.errorMessage = 'Registration failed. Please try again.';
+  //   }
+
+  //  }
+  //   );
+  // }
+
+  // registerWaiter() {
+  //   if (this.registerForm.invalid) {
+  //     return;
+  //   }
+
+  //   const { name, email, password, address, phone, image } = this.registerForm.value;
+
+  //   this.authService.registerWaiter({ name, email, password, address, phone, image }).subscribe(
+  //  {
+
+  //   next: AuthResponse => {
+  //     this.successMessage = 'Registration successful! Please check your email to activate your account.';
+  //     this.router.navigate(['/login']);
+  //   },
+  //   error:error => {
+  //     this.errorMessage = 'Registration failed. Please try again.';
+  //   }
+
+  //  }
+  //   );
+  // }
+
+  registerUser() {
     if (this.registerForm.invalid) {
       return;
     }
 
-    const { name, email, password, address, phone, image } = this.registerForm.value;
+    const { name, email, password, address, phone, image, role } = this.registerForm.value;
 
-    this.authService.register({ name, email, password, address, phone, image }).subscribe(
-   {
-
-    next: AuthResponse => {
-      this.successMessage = 'Registration successful! Please check your email to activate your account.';
-      this.router.navigate(['/login']);
-    },
-    error:error => {
-      this.errorMessage = 'Registration failed. Please try again.';
+    // Determine which registration method to call based on the selected role
+    if (role === 'ADMIN') {
+      this.authService.registerAdmin({ name, email, password, address, phone, image }).subscribe({
+        next: () => {
+          this.successMessage = 'Registration successful! Please check your email to activate your account.';
+          this.router.navigate(['/login']);
+        },
+        error: () => {
+          this.errorMessage = 'Registration failed. Please try again.';
+        }
+      });
+    } else if (role === 'WAITER') {
+      this.authService.registerWaiter({ name, email, password, address, phone, image }).subscribe({
+        next: () => {
+          this.successMessage = 'Registration successful! Please check your email to activate your account.';
+          this.router.navigate(['/login']);
+        },
+        error: () => {
+          this.errorMessage = 'Registration failed. Please try again.';
+        }
+      });
+    } else {
+      // Default registration for user
+      this.authService.register({ name, email, password, address, phone, image }).subscribe({
+        next: () => {
+          this.successMessage = 'Registration successful! Please check your email to activate your account.';
+          this.router.navigate(['/login']);
+        },
+        error: () => {
+          this.errorMessage = 'Registration failed. Please try again.';
+        }
+      });
     }
-
-   }
-    );
   }
-
 
 }

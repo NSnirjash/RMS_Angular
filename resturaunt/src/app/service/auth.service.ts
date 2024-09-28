@@ -57,6 +57,30 @@ export class AuthService {
     );
   }
 
+  registerAdmin(user: { name: string; email: string; password: string; address: string; phone: string; image: string }): Observable<AuthResponse> {
+    return this.http.post<AuthResponse>(`${this.baseUrl}/register/admin`, 
+      user, { headers: this.headers }).pipe(
+      map((response: AuthResponse) => {
+        if (this.isBrowser() && response.token) {
+          localStorage.setItem('authToken', response.token); // Store JWT token
+        }
+        return response;
+      })
+    );
+  }
+
+  registerWaiter(user: { name: string; email: string; password: string; address: string; phone: string; image: string }): Observable<AuthResponse> {
+    return this.http.post<AuthResponse>(`${this.baseUrl}/register/waiter`, 
+      user, { headers: this.headers }).pipe(
+      map((response: AuthResponse) => {
+        if (this.isBrowser() && response.token) {
+          localStorage.setItem('authToken', response.token); // Store JWT token
+        }
+        return response;
+      })
+    );
+  }
+
   getToken(): string | null {
     if (this.isBrowser()) {
       return localStorage.getItem('authToken');

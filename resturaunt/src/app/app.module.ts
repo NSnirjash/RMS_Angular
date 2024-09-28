@@ -17,6 +17,7 @@ import { UpdatetableComponent } from './table/updatetable/updatetable.component'
 import { RegisterComponent } from './login/register/register.component';
 import { LoginComponent } from './login/login/login.component';
 import { TokenInterceptor } from './guards/TokenInterceptor';
+import { TablebookingComponent } from './tablebooking/tablebooking.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { TokenInterceptor } from './guards/TokenInterceptor';
     ViewtableComponent,
     UpdatetableComponent,
     RegisterComponent,
-    LoginComponent
+    LoginComponent,
+    TablebookingComponent
   ],
   imports: [
     BrowserModule,

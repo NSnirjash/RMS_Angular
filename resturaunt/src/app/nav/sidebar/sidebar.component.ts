@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { AuthService } from '../../service/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sidebar',
@@ -7,7 +9,17 @@ import { Component } from '@angular/core';
 })
 export class SidebarComponent {
 
-  // Function to toggle the sidebar
+  constructor(
+    private authService:AuthService,
+    private router: Router
+   ){
+
+  }
+
+  logout(): void {
+    this.authService.logout(); // Call the logout method from AuthService
+    this.router.navigate(['/login']);
+  }
  
 
 }
