@@ -10,6 +10,13 @@
   color: #ffffff;
 }
 
+.animated-icon {
+  transition: transform 0.4s ease;
+}
+.animated-icon:hover {
+  transform: rotate(180deg);
+}
+
 /* Centered search box styling */
 .search-box {
   width: 300px;

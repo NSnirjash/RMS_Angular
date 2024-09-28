@@ -31,7 +31,7 @@ export class ViewtableComponent {
   }
 
   UpdateTable(table: TableModel): void {
-    this.router.navigate(['/updatefood', table.id]);  // Navigate to update form with food ID
+    this.router.navigate(['/updatetable', table.id]);  // Navigate to update form with food ID
   }
 
   deleteTable(id: number): void {

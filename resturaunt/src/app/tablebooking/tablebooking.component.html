@@ -13,7 +13,7 @@
             <h6>Table ID: {{ table.id }}</h6>
             <p>Capacity: {{ table.capacity }}</p>
             <p>Status: {{ table.status }}</p>
-            <button class="btn btn-primary" (click)="tableBooking.tables = table; createBooking(table)">
+            <button class="btn btn-primary" (click)="createBooking(table)">
               <i class="fa fa-book"></i> Book Now
             </button>
           </div>

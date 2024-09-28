@@ -4,6 +4,7 @@ import { AuthResponse } from '../model/AuthResponse';
 import { BehaviorSubject, map, Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { isPlatformBrowser } from '@angular/common';
+import { User } from '../model/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -39,6 +40,7 @@ export class AuthService {
             const decodedToken = this.decodeToken(response.token);
             localStorage.setItem('userRole', decodedToken.role);
             this.userRoleSubject.next(decodedToken.role); // Update role in BehaviorSubject
+            localStorage.setItem('user', JSON.stringify(response.user));
           }
           return response;
         })
@@ -93,6 +95,17 @@ export class AuthService {
     return JSON.parse(atob(payload));
   }
 
+  getUser(): User | null {
+    if (this.isBrowser()) {
+      let userJSON: string | null = localStorage.getItem('user');
+      if (userJSON) {
+        return JSON.parse(userJSON);
+      }
+      return null;
+    }
+    return null;
+  }
+
   getUserRole(): string | null {
     if (this.isBrowser()) {
       return localStorage.getItem('userRole');
@@ -136,6 +149,7 @@ export class AuthService {
     if (this.isBrowser()) {
       localStorage.removeItem('authToken');
       localStorage.removeItem('userRole');
+      localStorage.removeItem('user');
       this.userRoleSubject.next(null); // Clear role in BehaviorSubject
     }
     this.router.navigate(['/login']);
