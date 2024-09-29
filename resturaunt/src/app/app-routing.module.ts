@@ -9,6 +9,8 @@ import { UpdatetableComponent } from './table/updatetable/updatetable.component'
 import { TablebookingComponent } from './tablebooking/tablebooking.component';
 import { RegisterComponent } from './login/register/register.component';
 import { LoginComponent } from './login/login/login.component';
+import { TableapproveComponent } from './tableapprove/tableapprove.component';
+import { OrderfoodComponent } from './orderfood/orderfood.component';
 
 const routes: Routes = [
   {path: "register" , component: RegisterComponent},
@@ -20,6 +22,8 @@ const routes: Routes = [
   {path: "viewtable" , component: ViewtableComponent},
   {path: "updatetable/:id" , component: UpdatetableComponent},
   {path: "tablebooking" , component: TablebookingComponent},
+  {path: "tableapprove" , component: TableapproveComponent},
+  {path: "orderfood" , component: OrderfoodComponent},
 
 
 ];

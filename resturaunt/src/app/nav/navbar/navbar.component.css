@@ -17,6 +17,10 @@
   transform: rotate(180deg);
 }
 
+.navbar-brand:hover {
+  transform: rotate(10deg);
+}
+
 /* Centered search box styling */
 .search-box {
   width: 300px;

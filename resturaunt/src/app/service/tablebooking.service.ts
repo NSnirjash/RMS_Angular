@@ -12,6 +12,7 @@ import { response } from 'express';
 export class TablebookingService {
 
   private apiUrl = 'http://localhost:8090/api/bookings';
+  private apiUrl2 = 'http://localhost:8090/api/approvals';
 
   constructor(
     private http: HttpClient,
@@ -54,7 +55,7 @@ export class TablebookingService {
   // Get bookings for a specific user
   getUserBookings(userId: number): Observable<TableBooking[]> {
     const headers = this.getAuthHeaders();
-    return this.http.get<TableBooking[]>(`${this.apiUrl}/user/${userId}`, { headers })
+    return this.http.get<TableBooking[]>(`${this.apiUrl}/user?${userId}`, { headers })
       .pipe(
         catchError(this.handleError)
       );
@@ -87,7 +88,26 @@ export class TablebookingService {
 
   // Cancel a booking
   cancelBooking(bookingId: number) {
-    return this.http.delete(`${this.apiUrl}/cancel/${bookingId}`, {responseType: 'text'});
+
+    return this.http.delete(`${this.apiUrl}/cancel/${bookingId}`, { responseType: 'text' });
+  }
+
+  // Method to approve a booking
+  approveBooking(bookingId: number, adminId: number): Observable<TableBooking> {
+    const headers = this.getAuthHeaders();
+    return this.http.put<TableBooking>(`${this.apiUrl2}/approve/${bookingId}?${adminId}`, {}, { headers })
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  // Method to reject a booking
+  rejectBooking(bookingId: number, adminId: number): Observable<TableBooking> {
+    const headers = this.getAuthHeaders();
+    return this.http.put<TableBooking>(`${this.apiUrl2}/reject/${bookingId}/${adminId}`, {}, { headers })
+      .pipe(
+        catchError(this.handleError)
+      );
   }
 
   // Get all pending bookings

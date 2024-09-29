@@ -31,7 +31,7 @@
       <table class="table table-striped">
         <thead>
           <tr>
-            <th>Table ID</th>
+            <th>Table Number</th>
             <th>Booking Date</th>
             <th>Status</th>
             <th>Action</th>
@@ -39,7 +39,7 @@
         </thead>
         <tbody>
           <tr *ngFor="let booking of userBookings">
-            <td>{{ booking.tables.id }}</td>
+            <td>{{ booking.tables.tableNumber }}</td>
             <td>{{ booking.bookingDate | date: 'short' }}</td>
             <td>{{ booking.status }}</td>
             <td>

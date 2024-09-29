@@ -18,6 +18,8 @@ import { RegisterComponent } from './login/register/register.component';
 import { LoginComponent } from './login/login/login.component';
 import { TokenInterceptor } from './guards/TokenInterceptor';
 import { TablebookingComponent } from './tablebooking/tablebooking.component';
+import { TableapproveComponent } from './tableapprove/tableapprove.component';
+import { OrderfoodComponent } from './orderfood/orderfood.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +35,9 @@ import { TablebookingComponent } from './tablebooking/tablebooking.component';
     UpdatetableComponent,
     RegisterComponent,
     LoginComponent,
-    TablebookingComponent
+    TablebookingComponent,
+    TableapproveComponent,
+    OrderfoodComponent
   ],
   imports: [
     BrowserModule,
