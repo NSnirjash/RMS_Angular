@@ -9,4 +9,7 @@ export class OrderModel {
     quantity!: number; // Quantity of the food item
     status!: string;   // Status of the order (PENDING, APPROVED, REJECTED, SERVED)
     totalPrice!: number; // Total price of the order
+    admin!: User;
+    staff!: User;
+    notes!: string;
 }

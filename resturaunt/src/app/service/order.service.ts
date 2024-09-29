@@ -60,6 +60,30 @@ export class OrderService {
       );
   }
 
+  approveOrder(id: number, adminId: number, staffId: number): Observable<void> {
+    const headers = this.getAuthHeaders();
+    return this.http.delete<void>(`${this.apiUrl}/approve/${id}?adminId=${adminId}&staffId=${staffId}`, { headers })
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  serveOrder(id: number): Observable<void> {
+    const headers = this.getAuthHeaders();
+    return this.http.delete<void>(`${this.apiUrl}/delete/${id}`, { headers })
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  rejectOrder(id: number, adminId: number): Observable<void> {
+    const headers = this.getAuthHeaders();
+    return this.http.delete<void>(`${this.apiUrl}/reject/${id}?adminId=${adminId}`, { headers })
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
   deleteOrder(id: number): Observable<void> {
     const headers = this.getAuthHeaders();
     return this.http.delete<void>(`${this.apiUrl}/delete/${id}`, { headers })

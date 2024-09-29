@@ -30,39 +30,6 @@ export class TableapproveComponent {
     this.loadAllBookings();  // Load all bookings on init
   }
 
-  // Load all bookings
-  loadAllBookings() {
-    this.tableBookingService.getAllBookings().subscribe(
-      (data: TableBooking[]) => {
-        this.bookings = data;
-      },
-      error => {
-        console.error('Error loading bookings', error);
-      }
-    );
-  }
-
-  // Approve booking
-  // approveBooking(bookingId: number) {
-  //   const userId = this.selectedBooking?.bookedBy.id; // Get user ID from selected booking
-  //   const tableId = this.selectedBooking?.tables.id; // Get table ID from selected booking
-
-  //  // Check if userId and tableId are defined
-  // if (typeof userId !== 'number' || typeof tableId !== 'number') {
-  //   console.error('Invalid user ID or table ID');
-  //   return;
-  // }
-  //   this.tableBookingService.updateBooking(bookingId, userId, tableId).subscribe(
-  //     (data: TableBooking) => {
-  //       console.log('Booking approved successfully', data);
-  //       this.loadAllBookings(); // Reload bookings after approval
-  //     },
-  //     error => {
-  //       console.error('Error approving booking', error);
-  //     }
-  //   );
-  // }
-
   approveBooking(bookingId: number) {
     const adminId = this.user.id; // Replace with how you retrieve the current admin's ID
     this.tableBookingService.approveBooking(bookingId, adminId).subscribe(
@@ -89,6 +56,19 @@ export class TableapproveComponent {
     );
   }
 
+
+  // Load all bookings
+  loadAllBookings() {
+    this.tableBookingService.getAllBookings().subscribe(
+      (data: TableBooking[]) => {
+        this.bookings = data;
+      },
+      error => {
+        console.error('Error loading bookings', error);
+      }
+    );
+  }
+  
   loadPendingBookings() {
     this.tableBookingService.getPendingBookings().subscribe({
       next: (data) => this.bookings = data,

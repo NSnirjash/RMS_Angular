@@ -11,6 +11,7 @@ import { RegisterComponent } from './login/register/register.component';
 import { LoginComponent } from './login/login/login.component';
 import { TableapproveComponent } from './tableapprove/tableapprove.component';
 import { OrderfoodComponent } from './orderfood/orderfood.component';
+import { ApproveorderComponent } from './approveorder/approveorder.component';
 
 const routes: Routes = [
   {path: "register" , component: RegisterComponent},
@@ -24,6 +25,7 @@ const routes: Routes = [
   {path: "tablebooking" , component: TablebookingComponent},
   {path: "tableapprove" , component: TableapproveComponent},
   {path: "orderfood" , component: OrderfoodComponent},
+  {path: "orderapprove" , component: ApproveorderComponent},
 
 
 ];

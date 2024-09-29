@@ -5,6 +5,7 @@ import { OrderService } from '../service/order.service';
 import { Router } from '@angular/router';
 import { OrderModel } from '../model/order.model';
 import { AuthService } from '../service/auth.service';
+import { User } from '../model/user.model';
 
 @Component({
   selector: 'app-orderfood',
@@ -13,10 +14,12 @@ import { AuthService } from '../service/auth.service';
 })
 export class OrderfoodComponent {
 
-  foodItems: FoodModel[] = [];
-  cart: { food: FoodModel; quantity: number; }[] = [];
-  totalPrice: number = 0;
-  currentUser: any;
+  foodList: FoodModel[] = [];  // To store available food items
+  cart: { food: FoodModel, quantity: number }[] = [];  // Cart to store selected food items and quantities
+  totalPrice: number = 0;  // Total price of the order
+  user: User = new User()  // To store the logged-in user details
+  orderList: OrderModel[] = [];
+
 
   constructor(
     private foodService: FoodService, 
@@ -26,50 +29,73 @@ export class OrderfoodComponent {
   ) { }
 
   ngOnInit(): void {
-    this.foodService.getAllFood().subscribe((foods: FoodModel[]) => {
-      this.foodItems = foods;
-    });
+    let currentUser = this.authService.getUser();
+    if (currentUser != null) {
+      this.user = currentUser;
+    }
 
-    this.currentUser = this.authService.getUser();
+    this.loadFoods();
+    this.loadOrderList(); // Load previous orders if any
+  }
+
+  loadFoods(): void {
+    this.foodService.getAllFood().subscribe((foods) => {
+      this.foodList = foods;
+    });
   }
 
   addToCart(food: FoodModel): void {
-    const existingOrder = this.cart.find(item => item.food.id === food.id);
-    if (existingOrder) {
-      existingOrder.quantity += 1; // Increment quantity
+    const existingItem = this.cart.find(item => item.food.id === food.id);
+    if (existingItem) {
+      existingItem.quantity += 1;
     } else {
-      this.cart.push({ food, quantity: 1 }); // Add new food item to cart
+      this.cart.push({ food, quantity: 1 });
     }
-    this.calculateTotalPrice(); // Recalculate total price
+    this.calculateTotalPrice();
+  }
+
+  removeFromCart(foodId: number): void {
+    this.cart = this.cart.filter(item => item.food.id !== foodId);
+    this.calculateTotalPrice();
+  }
+
+  updateQuantity(foodId: number, quantity: number): void {
+    const item = this.cart.find(item => item.food.id === foodId);
+    if (item) {
+      item.quantity = quantity;
+      this.calculateTotalPrice();
+    }
   }
 
   calculateTotalPrice(): void {
-    this.totalPrice = this.cart.reduce((total, order) => total + (order.food.price * order.quantity), 0);
+    this.totalPrice = this.cart.reduce((acc, item) => acc + item.food.price * item.quantity, 0);
   }
 
-  updateQuantity(order: { food: FoodModel; quantity: number; }, quantity: number): void {
-    order.quantity = quantity;
-    this.calculateTotalPrice(); // Update total price on quantity change
+  placeOrder(): void {
+    this.cart.forEach(item => {
+      const newOrder: OrderModel = {
+        id: 0, // Id will be auto-generated
+        user: this.user,
+        food: item.food,
+        quantity: item.quantity,
+        totalPrice: item.food.price * item.quantity,
+        status: 'PENDING', // Initial status
+        admin: new User,
+        staff: new User,
+        notes: ''
+      };
+      
+      this.orderService.createOrder(newOrder).subscribe((order) => {
+        this.orderList.push(order); // Add the new order to the order list
+      });
+    });
+    this.cart = []; // Clear cart after placing the order
+    this.calculateTotalPrice();
   }
 
-  orderNow(): void {
-    // Create an array of OrderModel from the cart
-    const orders: OrderModel[] = this.cart.map(order => ({
-      food: order.food,
-      quantity: order.quantity,
-      user: this.currentUser,
-      status: 'PENDING',
-      totalPrice: order.food.price * order.quantity // Update total price in order
-    }));
-
-    // Call the createOrder method which expects an array of OrderModel
-    this.orderService.createOrder(orders).subscribe(response => {
-      alert('Orders placed successfully!');
-      this.cart = []; // Clear cart after order
-      this.totalPrice = 0; // Reset total price
-    }, error => {
-      console.error('Error placing orders:', error);
-      alert('Failed to place orders.');
+  loadOrderList(): void {
+    this.orderService.getOrdersByUserId(this.user.id).subscribe((orders) => {
+      this.orderList = orders;
     });
   }
 }

@@ -54,8 +54,7 @@ export class TablebookingService {
 
   // Get bookings for a specific user
   getUserBookings(userId: number): Observable<TableBooking[]> {
-    const headers = this.getAuthHeaders();
-    return this.http.get<TableBooking[]>(`${this.apiUrl}/user?${userId}`, { headers })
+    return this.http.get<TableBooking[]>(`${this.apiUrl}/user/${userId}`)
       .pipe(
         catchError(this.handleError)
       );
@@ -95,7 +94,7 @@ export class TablebookingService {
   // Method to approve a booking
   approveBooking(bookingId: number, adminId: number): Observable<TableBooking> {
     const headers = this.getAuthHeaders();
-    return this.http.put<TableBooking>(`${this.apiUrl2}/approve/${bookingId}?${adminId}`, {}, { headers })
+    return this.http.put<TableBooking>(`${this.apiUrl2}/approve/${bookingId}?adminId=${adminId}`, {}, { headers })
       .pipe(
         catchError(this.handleError)
       );
@@ -104,7 +103,7 @@ export class TablebookingService {
   // Method to reject a booking
   rejectBooking(bookingId: number, adminId: number): Observable<TableBooking> {
     const headers = this.getAuthHeaders();
-    return this.http.put<TableBooking>(`${this.apiUrl2}/reject/${bookingId}/${adminId}`, {}, { headers })
+    return this.http.put<TableBooking>(`${this.apiUrl2}/reject/${bookingId}?adminId=${adminId}`, {}, { headers })
       .pipe(
         catchError(this.handleError)
       );

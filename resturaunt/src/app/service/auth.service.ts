@@ -83,6 +83,10 @@ export class AuthService {
     );
   }
 
+  getAllWaiters(): Observable<User[]> {
+    return this.http.get<User[]>(`${this.baseUrl}/getAllWaiters`);
+  }
+
   getToken(): string | null {
     if (this.isBrowser()) {
       return localStorage.getItem('authToken');

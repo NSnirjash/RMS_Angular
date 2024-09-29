@@ -1,13 +1,164 @@
+/* Styling for the food cards */
+
+.card {
+  border: 2px solid #444;
+  border-radius: 10px;
+  background-color: #1e1e1e;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.7);
+}
+
+.card-img-top {
+  height: 200px;
+  object-fit: cover;
+  border-radius: 10px 10px 0 0;
+}
+
+.card-body {
+  text-align: center;
+  padding: 15px;
+  background-color: #333;
+}
+
+.card-title {
+  font-weight: bold;
+  color: #ffa726; /* Orange for title */
+}
+
+.card-text {
+  font-size: 1.1em;
+  color: #ccc; /* Light grey for text */
+}
+
+.btn-primary {
+  background-color: #607d8b; /* Dark grey-blue */
+  border: none;
+  transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+  background-color: #455a64; /* Darker shade on hover */
+}
+
+/* Cart section styles */
+table {
+  position: fixed; /* Fix the cart section */
+  right: 20px; /* Space from the right edge */
+  top: 100px; /* Space from the top */
+  width: 300px; /* Fixed width for the cart */
+  background-color: rgba(30, 30, 30, 0.9); /* Slightly transparent background */
+  color: #fff; /* Text color */
+  padding: 20px; /* Padding inside the cart */
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5); /* Shadow effect */
+  max-height: 80%; /* Limit the height */
+  overflow-y: auto; /* Enable vertical scrolling */
+}
+
+thead th {
+  background-color: #212121; /* Very dark grey */
+  color: #ffa726; /* Orange text */
+  padding: 10px;
+  text-align: left;
+}
+
+tbody td {
+  padding: 10px;
+  border-bottom: 1px solid #333; /* Darker border */
+}
+
+input[type="number"] {
+  width: 60px;
+  padding: 5px;
+  background-color: #444;
+  color: #fff;
+  border-radius: 5px;
+  border: 1px solid #555; /* Lighter border */
+  text-align: center;
+}
+
+h4 {
+  color: #ffa726; /* Orange text for headings */
+}
+
+.btn-success {
+  background-color: #388e3c; /* Dark green */
+  border: none;
+  padding: 10px 20px;
+  border-radius: 20px;
+  font-weight: bold;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-success:hover {
+  background-color: #2e7d32; /* Darker green on hover */
+  transform: scale(1.05);
+}
+
+/* General Layout */
 .container {
-    margin-top: 30px;
-  }
-  
+  padding: 20px;
+  background-color: #121212; /* Very dark background */
+  border-radius: 15px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5); /* Darker shadow */
+}
+
+h2, h3 {
+  color: #ffa726; /* Orange headings */
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+h3 {
+  margin-top: 40px;
+}
+
+p {
+  font-size: 1.1em;
+  color: #b0bec5; /* Light grey for paragraphs */
+}
+
+table {
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+tfoot td {
+  font-weight: bold;
+  color: #4caf50; /* Green for total price */
+}
+
+tfoot td:last-child {
+  text-align: right;
+}
+
+input[type="number"]:focus {
+  outline: none;
+  border-color: #ffa726; /* Orange on focus */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
   .card-img-top {
-    height: 200px;
-    object-fit: cover;
+    height: 150px;
   }
-  
-  .table {
-    margin-top: 20px;
+
+  .btn-primary {
+    padding: 5px 10px;
   }
-  
+
+  .btn-success {
+    width: 100%;
+    padding: 10px 0;
+    margin-top: 10px;
+  }
+
+  table {
+    font-size: 0.9em;
+  }
+}
