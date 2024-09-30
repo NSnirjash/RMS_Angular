@@ -102,6 +102,7 @@ export class AuthService {
   getUser(): User | null {
     if (this.isBrowser()) {
       let userJSON: string | null = localStorage.getItem('user');
+      console.log(localStorage.getItem('user')); 
       if (userJSON) {
         return JSON.parse(userJSON);
       }

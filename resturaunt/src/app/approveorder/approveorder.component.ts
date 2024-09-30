@@ -5,6 +5,8 @@ import { OrderModel } from '../model/order.model';
 import { AuthService } from '../service/auth.service';
 import { OrderService } from '../service/order.service';
 import { User } from '../model/user.model';
+import { privateDecrypt } from 'node:crypto';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-approveorder',
@@ -19,6 +21,8 @@ export class ApproveorderComponent {
 
   constructor(private orderService: OrderService,
     private authService: AuthService,
+    private router:Router
+  
 
   ) {}
 
@@ -56,6 +60,9 @@ export class ApproveorderComponent {
       this.orderService.approveOrder(order.id, user.id, order.staff ? order.staff.id : 0).subscribe(
         (updatedOrder) => {
           console.log('Order approved:', updatedOrder);
+          this.router.navigate(['orderapprove']).then(() => {
+            window.location.reload();
+          });
         },
         (error) => {
           console.error('Error approving order', error);

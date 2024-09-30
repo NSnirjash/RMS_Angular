@@ -25,7 +25,6 @@ export class SavefoodComponent {
       this.foodService.saveFood(this.food, this.imageFile).subscribe({
         next: () => {
           alert('Food added successfully!');
-          this.router.navigate(['/viewfood']);  // Navigate to food list or another route after saving
         },
         error: (err) => {
           this.errorMessage = 'Failed to add food: ' + err.message;
@@ -34,5 +33,6 @@ export class SavefoodComponent {
     } else {
       this.errorMessage = 'Please select an image file.';
     }
+    this.router.navigate(['/viewfood']);  // Navigate to food list or another route after saving
   }
 }

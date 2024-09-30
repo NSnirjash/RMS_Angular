@@ -13,14 +13,14 @@
 }
 
 .card-img-top {
-  height: 300px;
+  height: 250px;
   object-fit: cover;
   border-radius: 10px 10px 0 0;
 }
 
 .card-body {
   text-align: center;
-  padding: 15px;
+  padding: 10px;
   background-color: #333;
 }
 
@@ -90,10 +90,6 @@ input[type="number"] {
   text-align: center;
 }
 
-h4 {
-  color: #ffa726; /* Orange text for headings */
-}
-
 .btn-success {
   background-color: #388e3c; /* Dark green */
   border: none;
@@ -116,7 +112,7 @@ h4 {
   box-shadow: 0 4px 12px rgba(255, 255, 255, 0.925);  */
 
 h2, h3 {
-  color: #ffa726; /* Orange headings */
+  color: #050505; /* Orange headings */
   text-align: center;
   font-weight: bold;
   margin-bottom: 20px;

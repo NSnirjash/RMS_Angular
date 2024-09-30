@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { OrderModel } from '../model/order.model';
 import { catchError, Observable, throwError } from 'rxjs';
@@ -25,20 +25,40 @@ export class OrderService {
     });
   }
 
-  createOrder(order: OrderModel): Observable<OrderModel> {
+  // createOrder(order: OrderModel): Observable<OrderModel> {
 
+  //   const token = this.authService.getToken();
+  //   console.log('Token:', token); // Verify token
+  //   const headers = new HttpHeaders({
+  //     'Authorization': `Bearer ${token}`
+  //     // 'Content-Type' is not needed here
+  //   });
+  //   console.log(headers);
+  //   return this.http.post<OrderModel>(`${this.apiUrl}/create`, order, { headers })
+  //     .pipe(
+  //       catchError(this.handleError)
+  //     );
+  // }
+
+
+  createOrder(order: OrderModel): Observable<OrderModel> {
     const token = this.authService.getToken();
-    console.log('Token:', token); // Verify token
+    console.log('Token:', token); // Check if token is valid
     const headers = new HttpHeaders({
-      'Authorization': `Bearer ${token}`
-      // 'Content-Type' is not needed here
+      'Authorization': `Bearer ${token}`  // Ensure this is correct
     });
-    console.log(headers);
+    console.log('Headers:', headers); // Debugging the headers
+    console.log(order); // Debugging the headers
+  
+    
     return this.http.post<OrderModel>(`${this.apiUrl}/create`, order, { headers })
       .pipe(
-        catchError(this.handleError)
+        catchError(this.handleError)  // Log full error details
       );
   }
+  
+
+  
 
   getAllOrders(): Observable<OrderModel[]> {
     return this.http.get<OrderModel[]>(`${this.apiUrl}/all`);
@@ -62,7 +82,7 @@ export class OrderService {
 
   approveOrder(id: number, adminId: number, staffId: number): Observable<void> {
     const headers = this.getAuthHeaders();
-    return this.http.delete<void>(`${this.apiUrl}/approve/${id}?adminId=${adminId}&staffId=${staffId}`, { headers })
+    return this.http.put<void>(`${this.apiUrl}/approve/${id}?adminId=${adminId}&staffId=${staffId}`, { headers })
       .pipe(
         catchError(this.handleError)
       );
@@ -92,8 +112,19 @@ export class OrderService {
       );
   }
 
-  private handleError(error: any) {
-    console.error('An error occurred:', error);
-    return throwError(() => new Error(error.message || 'Server Error'));
+  private handleError(error: HttpErrorResponse) {
+    console.error('HTTP Error: ', error); // Log full error details
+  
+    if (error.status === 403) {
+      console.error('403 Forbidden: Access denied. Check the token or user permissions.');
+    } else if (error.error instanceof ErrorEvent) {
+      // Client-side or network error
+      console.error('A client-side error occurred:', error.error.message);
+    } else {
+      // Backend returned an unsuccessful response code
+      console.error(`Backend returned code ${error.status}, body was: `, error.error);
+    }
+    return throwError(() => new Error('Something went wrong; please try again later.'));
   }
+  
 }

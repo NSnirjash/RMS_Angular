@@ -20,19 +20,48 @@ export class OrderfoodComponent {
   user: User = new User()  // To store the logged-in user details
   orderList: OrderModel[] = [];
 
+  userId!: number;
+
+  staff!:any;
+
+
 
   constructor(
-    private foodService: FoodService, 
-    private orderService: OrderService,  
+    private foodService: FoodService,
+    private orderService: OrderService,
     private router: Router,
     private authService: AuthService
   ) { }
 
   ngOnInit(): void {
+    // let currentUser = this.authService.getUser();    
+
+    // if (currentUser != null && currentUser.id != null) {
+    //   this.user = currentUser;
+
+
+    // }
+
     let currentUser = this.authService.getUser();
-    if (currentUser != null) {
+
+    if (currentUser != null && currentUser.id != null) {
       this.user = currentUser;
+
+      // Now you can access specific details of the user like this:
+      console.log('User ID:', currentUser.id);
+      console.log('User Name:', currentUser.name);
+      console.log('User Email:', currentUser.email);
+      console.log('User Role:', currentUser.role);
+
+      // If needed, you can assign these details to component properties:
+      this.userId = currentUser.id;
+
+
+
+    } else {
+      console.log('No user is currently logged in.');
     }
+
 
     this.loadFoods();
     this.loadOrderList(); // Load previous orders if any
@@ -74,17 +103,18 @@ export class OrderfoodComponent {
   placeOrder(): void {
     this.cart.forEach(item => {
       const newOrder: OrderModel = {
-        id: 0, // Id will be auto-generated
+
+        id: 0, // Set to 0 or leave out if backend will generate it
         user: this.user,
         food: item.food,
         quantity: item.quantity,
         totalPrice: item.food.price * item.quantity,
         status: 'PENDING', // Initial status
-        admin: new User,
-        staff: new User,
-        notes: ''
+        notes: '', // Initial empty notes
+        admin: this.user, // Assuming no admin by default
+        staff:  this.staff// Assuming no staff by default
       };
-      
+
       this.orderService.createOrder(newOrder).subscribe((order) => {
         this.orderList.push(order); // Add the new order to the order list
       });
@@ -94,7 +124,7 @@ export class OrderfoodComponent {
   }
 
   loadOrderList(): void {
-    this.orderService.getOrdersByUserId(this.user.id).subscribe((orders) => {
+    this.orderService.getOrdersByUserId(this.userId).subscribe((orders) => {
       this.orderList = orders;
     });
   }

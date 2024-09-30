@@ -5,7 +5,8 @@
     <!-- Food List Display -->
     <div class="col-md-6">
       <div *ngFor="let food of foodList" class="card mb-3">
-        <img [src]="food.image" class="card-img-top" alt="{{ food.name }}">
+      
+        <img [src]="'http://localhost:8090/images/' + food.image" class="card-img-top my-1" alt="{{ food.name }}">
         <div class="card-body">
           <h5 class="card-title">{{ food.name }}</h5>
           <p class="card-text">{{ food.category }}</p>
