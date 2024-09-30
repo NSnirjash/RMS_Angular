@@ -15,6 +15,7 @@ export class ApproveorderComponent {
 
   orders: OrderModel[] = [];
   waiters: User[] = [];
+  filterStatus: string = 'all';
 
   constructor(private orderService: OrderService,
     private authService: AuthService,

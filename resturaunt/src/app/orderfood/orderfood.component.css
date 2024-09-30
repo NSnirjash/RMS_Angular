@@ -1,7 +1,7 @@
 /* Styling for the food cards */
 
 .card {
-  border: 2px solid #444;
+  border: 2px solid #e20404;
   border-radius: 10px;
   background-color: #1e1e1e;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -13,7 +13,7 @@
 }
 
 .card-img-top {
-  height: 200px;
+  height: 300px;
   object-fit: cover;
   border-radius: 10px 10px 0 0;
 }
@@ -44,12 +44,21 @@
   background-color: #455a64; /* Darker shade on hover */
 }
 
+.cart-container {
+  position: sticky; /* Keep it fixed in view while scrolling */
+  top: 0; /* Position it at the top of the parent */
+  max-height: 800px; /* Adjust based on your layout */
+  overflow-y: auto; /* Enable vertical scrolling if needed */
+  z-index: 1; /* Make sure it stays above other content */
+  background-color: #343a40; /* Match your table background color */
+}
+
+.table {
+  margin-bottom: 0; /* Avoid margin at the bottom of the table */
+}
+
 /* Cart section styles */
 table {
-  position: fixed; /* Fix the cart section */
-  right: 20px; /* Space from the right edge */
-  top: 100px; /* Space from the top */
-  width: 300px; /* Fixed width for the cart */
   background-color: rgba(30, 30, 30, 0.9); /* Slightly transparent background */
   color: #fff; /* Text color */
   padding: 20px; /* Padding inside the cart */
@@ -100,12 +109,11 @@ h4 {
 }
 
 /* General Layout */
-.container {
+/* .container {
   padding: 20px;
-  background-color: #121212; /* Very dark background */
+  background-color: #f7f0f0; 
   border-radius: 15px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5); /* Darker shadow */
-}
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.925);  */
 
 h2, h3 {
   color: #ffa726; /* Orange headings */
