@@ -39,7 +39,7 @@
 
   <div class="filter">
       <label for="filterStatus">Filter by Status:</label>
-      <select id="filterStatus" [(ngModel)]="filterStatus" (change)="loadAllOrders()">
+      <select id="filterStatus" [(ngModel)]="filterStatus" (change)="loadAllOrderDetails()">
           <option value="all">All Orders</option>
           <option value="pending">Pending Orders</option>
           <option value="approved">Approved Orders</option>

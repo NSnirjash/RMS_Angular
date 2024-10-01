@@ -7,6 +7,7 @@ import { OrderService } from '../service/order.service';
 import { User } from '../model/user.model';
 import { privateDecrypt } from 'node:crypto';
 import { Router } from '@angular/router';
+import { OrderDetailsModel } from '../model/orderdetails.model';
 
 @Component({
   selector: 'app-approveorder',
@@ -18,6 +19,8 @@ export class ApproveorderComponent {
   orders: OrderModel[] = [];
   waiters: User[] = [];
   filterStatus: string = 'all';
+  orderDetailsList: OrderDetailsModel[] = [];
+  errorMessage: string = '';
 
   constructor(private orderService: OrderService,
     private authService: AuthService,
@@ -27,7 +30,7 @@ export class ApproveorderComponent {
   ) {}
 
   ngOnInit(): void {
-    this.loadAllOrders();
+    // this.loadAllOrders();
     this.loadAllWaiters();
   }
 
@@ -43,13 +46,25 @@ export class ApproveorderComponent {
     );
   }
 
-  loadAllOrders(): void {
-    this.orderService.getAllOrders().subscribe(
-      (orders) => {
-        this.orders = orders;
+  // loadAllOrders(): void {
+  //   this.orderService.getAllOrders().subscribe(
+  //     (orders) => {
+  //       this.orders = orders;
+  //     },
+  //     (error) => {
+  //       console.error('Error loading approved orders', error);
+  //     }
+  //   );
+  // }
+
+  loadAllOrderDetails(): void {
+    this.orderService.getAllOrderDetails().subscribe(
+      (data: any) => {
+        this.orderDetailsList = data;
       },
-      (error) => {
-        console.error('Error loading approved orders', error);
+      (error: any) => {
+        this.errorMessage = 'Error fetching order details';
+        console.error(error);
       }
     );
   }

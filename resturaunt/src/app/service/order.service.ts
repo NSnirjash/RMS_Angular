@@ -88,6 +88,15 @@ export class OrderService {
       );
   }
 
+
+  createOrderDetailsWithOrders(orderDetails: any, orders: any[]): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/create`, { orderDetails, orders });
+ }
+
+  getAllOrderDetails(): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/view`);
+}
+
   serveOrder(id: number): Observable<void> {
     const headers = this.getAuthHeaders();
     return this.http.delete<void>(`${this.apiUrl}/delete/${id}`, { headers })
