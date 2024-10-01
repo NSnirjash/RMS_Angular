@@ -12,12 +12,15 @@ import { LoginComponent } from './login/login/login.component';
 import { TableapproveComponent } from './tableapprove/tableapprove.component';
 import { OrderfoodComponent } from './orderfood/orderfood.component';
 import { ApproveorderComponent } from './approveorder/approveorder.component';
+import { ViewallfoodComponent } from './food/viewallfood/viewallfood.component';
+import { OrderlistComponent } from './orderlist/orderlist.component';
 
 const routes: Routes = [
   {path: "register" , component: RegisterComponent},
   {path: "login" , component: LoginComponent},
   {path: "savefood" , component: SavefoodComponent},
   {path: "viewfood" , component: ViewfoodComponent},
+  {path: "viewallfood" , component: ViewallfoodComponent},
   {path: "updatefood/:id" , component: UpdatefoodComponent},
   {path: "savetable" , component: SavetableComponent},
   {path: "viewtable" , component: ViewtableComponent},
@@ -25,6 +28,7 @@ const routes: Routes = [
   {path: "tablebooking" , component: TablebookingComponent},
   {path: "tableapprove" , component: TableapproveComponent},
   {path: "orderfood" , component: OrderfoodComponent},
+  {path: "orderlist" , component: OrderlistComponent},
   {path: "orderapprove" , component: ApproveorderComponent},
 
 

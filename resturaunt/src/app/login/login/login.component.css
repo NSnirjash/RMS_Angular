@@ -1,7 +1,7 @@
 /* styles.css or component-specific CSS */
 :host {
     display: block;
-    height: 100vh; /
+    height: 100vh;
 }
 
 body {

@@ -21,6 +21,8 @@ import { TablebookingComponent } from './tablebooking/tablebooking.component';
 import { TableapproveComponent } from './tableapprove/tableapprove.component';
 import { OrderfoodComponent } from './orderfood/orderfood.component';
 import { ApproveorderComponent } from './approveorder/approveorder.component';
+import { ViewallfoodComponent } from './food/viewallfood/viewallfood.component';
+import { OrderlistComponent } from './orderlist/orderlist.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +41,10 @@ import { ApproveorderComponent } from './approveorder/approveorder.component';
     TablebookingComponent,
     TableapproveComponent,
     OrderfoodComponent,
-    ApproveorderComponent
+    ApproveorderComponent,
+    ViewallfoodComponent,
+    OrderlistComponent,
+
   ],
   imports: [
     BrowserModule,
