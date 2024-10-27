@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { OrderModel } from '../model/order.model';
 import { catchError, Observable, throwError } from 'rxjs';
 import { AuthService } from './auth.service';
+import { OrderDetailsModel } from '../model/orderdetails.model';
 
 @Injectable({
   providedIn: 'root'
@@ -95,6 +96,11 @@ export class OrderService {
 
   getAllOrderDetails(): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/view`);
+}
+
+getOrderDetailsById(id: number): Observable<any> {
+  return this.http.get<any>(`${this.apiUrl}/getOrderDetailsById/${id}`);
+
 }
 
   serveOrder(id: number): Observable<void> {
