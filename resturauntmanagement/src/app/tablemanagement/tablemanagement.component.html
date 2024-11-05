@@ -1,0 +1,26 @@
+<!-- customer-table.component.html -->
+<div class="container mt-4">
+    <h2>Available Tables</h2>
+    <div class="row">
+      <div *ngFor="let table of tables" class="col-md-4 mb-3">
+        <div class="card" [ngClass]="{'bg-success': table.status === 'available', 'bg-danger': table.status === 'occupied', 'bg-warning': table.status === 'requested'}">
+          <div class="card-body">
+            <h5 class="card-title">{{ table.name }}</h5>
+            <p class="card-text">Capacity: {{ table.capacity }}</p>
+            <p class="card-text">Status: {{ table.status }}</p>
+            <p *ngIf="table.reservationTime">Reservation Time: {{ table.reservationTime | date:'medium' }}</p> <!-- Display reservation time -->
+            <div *ngIf="table.status === 'available'">
+                <label for="datetime">Select Reservation Date and Time:</label>
+                <input type="datetime-local" [(ngModel)]="reservationDateTime" class="form-control mb-2"/>
+                <button class="btn btn-primary" (click)="requestReservation(table)">
+                  Request Reservation
+                </button>
+              </div>
+            <p *ngIf="table.status === 'requested'">Reservation Requested</p>
+            <p *ngIf="table.status === 'reserved'">Table Reserved</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

@@ -1,0 +1,21 @@
+<!-- src/app/components/update-order/update-order.component.html -->
+<div class="update-order-container">
+  <h2>Update Order</h2>
+  
+  <div *ngFor="let selectedItem of selectedItems" class="order-item">
+    <div class="item-details">
+      <img [src]="selectedItem.item.image" alt="{{ selectedItem.item.item }}" class="item-image">
+      <div>
+        <h4>{{ selectedItem.item.item }}</h4>
+        <p>Price: ${{ selectedItem.item.price }}</p>
+        <label for="quantity">Quantity:</label>
+        <input type="number" [(ngModel)]="selectedItem.quantity" (input)="changeQuantity(selectedItem.item, selectedItem.quantity)" min="1">
+      </div>
+    </div>
+  </div>
+
+  <div class="order-summary">
+    <h4>Total Amount: ${{ totalAmount }}</h4>
+    <button (click)="updateOrder()">Update Order</button>
+  </div>
+</div>

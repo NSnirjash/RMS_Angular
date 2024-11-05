@@ -1,0 +1,68 @@
+<div class="container mt-4">
+    <h2>Create New Staff Member</h2>
+    <form (ngSubmit)="createStaff()">
+      <!-- Personal Information -->
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" id="name" class="form-control" [(ngModel)]="newStaff.name" name="name" required>
+      </div>
+      <div class="form-group">
+        <label for="address">Address</label>
+        <input type="text" id="address" class="form-control" [(ngModel)]="newStaff.address" name="address">
+      </div>
+      <div class="form-group">
+        <label for="phoneNumber">Phone Number</label>
+        <input type="text" id="phoneNumber" class="form-control" [(ngModel)]="newStaff.phoneNumber" name="phoneNumber">
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" class="form-control" [(ngModel)]="newStaff.email" name="email">
+      </div>
+      <div class="form-group">
+        <label for="image">Image URL</label>
+        <input type="text" id="image" class="form-control" [(ngModel)]="newStaff.image" name="image">
+      </div>
+  
+      <!-- Job Details -->
+      <div class="form-group">
+        <label for="role">Role</label>
+        <input type="text" id="role" class="form-control" [(ngModel)]="newStaff.role" name="role">
+      </div>
+      <div class="form-group">
+        <label for="hireDate">Hire Date</label>
+        <input type="date" id="hireDate" class="form-control" [(ngModel)]="newStaff.hireDate" name="hireDate">
+      </div>
+      <div class="form-group">
+        <label for="employmentStatus">Employment Status</label>
+        <select id="employmentStatus" class="form-control" [(ngModel)]="newStaff.employmentStatus" name="employmentStatus">
+          <option *ngFor="let status of employmentStatusOptions">{{ status }}</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="shiftSchedule">Shift Schedule</label>
+        <input type="text" id="shiftSchedule" class="form-control" [(ngModel)]="newStaff.shiftSchedule" name="shiftSchedule">
+      </div>
+      <div class="form-group">
+        <label for="salary">Salary</label>
+        <input type="number" id="salary" class="form-control" [(ngModel)]="newStaff.salary" name="salary">
+      </div>
+      <div class="form-group">
+        <label for="skills">Skills</label>
+        <input type="text" id="skills" class="form-control" [(ngModel)]="newStaff.skills" name="skills">
+      </div>
+      <div class="form-group">
+        <label for="availability">Availability</label>
+        <select id="availability" class="form-control" [(ngModel)]="newStaff.availability" name="availability">
+          <option *ngFor="let availability of availabilityOptions">{{ availability }}</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="leaveRecords">Leave Records</label>
+        <input type="text" id="leaveRecords" class="form-control" [(ngModel)]="newStaff.leaveRecords" name="leaveRecords">
+      </div>
+      <button type="submit" class="btn btn-success mt-3">
+        <i class="bi bi-save"></i> Save
+      </button>
+    </form>
+  </div>
+  

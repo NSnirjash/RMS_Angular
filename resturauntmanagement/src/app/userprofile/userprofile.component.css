@@ -1,0 +1,22 @@
+.container {
+    margin-top: 30px;
+  }
+  
+  .card {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+  }
+  
+  .card-title {
+    font-weight: bold;
+    font-size: 1.5rem;
+  }
+  
+  .list-group-item {
+    font-size: 1rem;
+  }
+  
+  img {
+    object-fit: cover;
+  }
+  

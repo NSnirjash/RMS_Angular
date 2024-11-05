@@ -1,0 +1,46 @@
+<app-navbar></app-navbar>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-auto">     
+    </div>
+    <div id="sidebar" class="sidebar collapse">
+      <app-sidenav></app-sidenav>
+    </div>
+    <div class="mt-5">
+      <div class="row mt-5">
+        <div class="col-md-2">
+  
+        </div>
+        <div class="col-md-10">
+          <router-outlet></router-outlet>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+<!-- <div>
+  <div  id="sidebar" class="sidebar collapse">
+  <app-sidenav></app-sidenav>
+</div>
+  <div class="container-fluid">
+    <app-navbar></app-navbar>
+    <div class="content-wrapper p-2 mr-4 mt-2">
+      <div class="main-panel">
+        <router-outlet></router-outlet>
+      </div>
+
+    </div>
+  </div>
+</div> -->
+
+<!-- <ng-template #loggedOut>
+  <div>
+    <router-outlet></router-outlet>
+  </div>
+</ng-template> -->
