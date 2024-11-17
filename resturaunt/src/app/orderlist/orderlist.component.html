@@ -1,26 +1,54 @@
-<!-- Order List Display -->
-<div class="container">
-    <div *ngIf="orderList.length > 0" class="order-list mt-5">
-        <h2>Your Orders</h2>
-        <table class="table table-dark table-hover">
-            <thead>
-                <tr>
-                    <th>Order ID</th>
-                    <th>Food</th>
-                    <th>Quantity</th>
-                    <th>Total Price</th>
-                    <th>Status</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let order of orderList">
-                    <td>{{ order.id }}</td>
-                    <td>{{ order.food.name }}</td>
-                    <td>{{ order.quantity }}</td>
-                    <td>{{ order.totalPrice | currency }}</td>
-                    <td>{{ order.status }}</td>
-                </tr>
-            </tbody>
-        </table>
+<div class="container mt-5">
+    <h2>Your Orders</h2>
+  
+    <!-- Order List -->
+    <div class="order-list mt-3">
+      <table class="table table-striped table-bordered">
+        <thead class="table-dark">
+          <tr>
+            <th>Order ID</th>
+            <th>Food Items</th>
+            <th>Total Quantity</th>
+            <th>Total Price</th>
+            <th>Status</th>
+            <th *ngIf="isAdmin()">Waiter</th>
+            <th *ngIf="isAdmin()">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let order of orderList">
+            <td>{{ order.id }}</td>
+            <td>
+              <ul>
+                <li *ngFor="let item of order.orderItems">
+                  {{ item.food?.name }} (x{{ item.quantity }})
+                </li>
+              </ul>
+            </td>
+            <td>{{ getTotalQuantity(order) }}</td>
+            <td>{{ order.totalPrice | currency }}</td>
+            <td>{{ order.status }}</td>
+            <td *ngIf="isAdmin()">
+              <!-- Show Waiter Name if Approved -->
+              <ng-container *ngIf="isApproved(order); else assignWaiter">
+                {{ order.staff?.name || 'N/A' }}
+              </ng-container>
+
+              <!-- Show Dropdown if Not Approved -->
+              <ng-template #assignWaiter>
+                <select class="form-select form-select-sm" [(ngModel)]="selectedWaiters[order.id]">
+                  <option *ngFor="let waiter of waiterList" [value]="waiter.id">
+                    {{ waiter.name }}
+                  </option>
+                </select>
+              </ng-template>
+            </td>
+            <td *ngIf="isAdmin() && !isApproved(order)">
+              <button class="btn btn-success btn-sm me-2" (click)="approveOrder(order.id)">Approve</button>
+              <button class="btn btn-danger btn-sm" (click)="rejectOrder(order.id)">Reject</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
-</div>
+  </div>

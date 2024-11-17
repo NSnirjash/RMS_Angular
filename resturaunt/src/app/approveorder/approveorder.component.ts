@@ -7,7 +7,6 @@ import { OrderService } from '../service/order.service';
 import { User } from '../model/user.model';
 import { privateDecrypt } from 'node:crypto';
 import { Router } from '@angular/router';
-import { OrderDetailsModel } from '../model/orderdetails.model';
 
 @Component({
   selector: 'app-approveorder',
@@ -19,7 +18,6 @@ export class ApproveorderComponent {
   orders: OrderModel[] = [];
   waiters: User[] = [];
   filterStatus: string = 'all';
-  orderDetailsList: OrderDetailsModel[] = [];
   errorMessage: string = '';
 
   constructor(private orderService: OrderService,
@@ -58,15 +56,15 @@ export class ApproveorderComponent {
   // }
 
   loadAllOrderDetails(): void {
-    this.orderService.getAllOrderDetails().subscribe(
-      (data: any) => {
-        this.orderDetailsList = data;
-      },
-      (error: any) => {
-        this.errorMessage = 'Error fetching order details';
-        console.error(error);
-      }
-    );
+    // this.orderService.getAllOrderDetails().subscribe(
+    //   (data: any) => {
+    //     this.orderDetailsList = data;
+    //   },
+    //   (error: any) => {
+    //     this.errorMessage = 'Error fetching order details';
+    //     console.error(error);
+    //   }
+    // );
   }
 
   approveOrder(order: OrderModel): void {

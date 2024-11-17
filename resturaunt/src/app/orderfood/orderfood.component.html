@@ -1,86 +1,26 @@
 <div class="container">
-  <h2>Order Your Favorite Food</h2>
-
-  <div class="row">
-    <!-- Food List Display -->
-    <div class="col-md-6">
-      <div *ngFor="let food of foodList" class="card mb-3">
-      
-        <img [src]="'http://localhost:8090/images/' + food.image" class="card-img-top my-1" alt="{{ food.name }}">
-        <div class="card-body">
-          <h5 class="card-title">{{ food.name }}</h5>
-          <p class="card-text">{{ food.category }}</p>
-          <p class="card-text">Price: {{ food.price | currency }}</p>
-          <button class="btn btn-primary" (click)="addToCart(food)">Add to Cart</button>
-        </div>
+  <h2>Order Food</h2>
+  <div class="food-grid">
+    <div class="food-card" *ngFor="let food of foodList">
+      <img [src]="food.image" alt="{{ food.name }}" class="food-image">
+      <h3>{{ food.name }}</h3>
+      <p>Price: ${{ food.price }}</p>
+      <div class="quantity-controls text-center">
+        <button class="btn btn-danger" (click)="decrementQuantity(food)" [disabled]="!isFoodSelected(food.id)">-</button>
+        <span style="font-size: xx-large; padding: 10%;">{{ getFoodQuantity(food.id) }}</span>
+        <button class="btn btn-success" (click)="incrementQuantity(food)">+</button>
       </div>
-    </div>
-
-    <!-- Cart Display -->
-    <div class="col-md-6">
-      <h3>Your Cart</h3>
-      <div class="cart-container">
-        <table class="table table-dark table-hover" *ngIf="cart.length > 0">
-          <thead>
-            <tr>
-              <th>Food</th>
-              <th>Quantity</th>
-              <th>Price</th>
-              <th>Total</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let item of cart">
-              <td>{{ item.food.name }}</td>
-              <td>
-                <input type="number" [(ngModel)]="item.quantity" (change)="updateQuantity(item.food.id, item.quantity)" min="1">
-              </td>
-              <td>{{ item.food.price | currency }}</td>
-              <td>{{ item.food.price * item.quantity | currency }}</td>
-              <td>
-                <button class="btn btn-danger" (click)="removeFromCart(item.food.id)">Remove</button>
-              </td>
-            </tr>
-          </tbody>
-          <tfoot>
-            <tr>
-              <td colspan="3">Total Price</td>
-              <td>{{ totalPrice | currency }}</td>
-            </tr>
-            <tr>
-              <td colspan="4"><button class="btn btn-success" (click)="placeOrder()" [disabled]="cart.length === 0">Order Now</button></td>
-            </tr>
-          </tfoot>
-        </table>
-      </div>
-
-      
     </div>
   </div>
 
-  <!-- Order List Display -->
-  <div *ngIf="orderList.length > 0" class="order-list mt-5">
-    <h3>Your Orders</h3>
-    <table class="table table-dark table-hover">
-      <thead>
-        <tr>
-          <th>Order ID</th>
-          <th>Food</th>
-          <th>Quantity</th>
-          <th>Total Price</th>
-          <th>Status</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let order of orderList">
-          <td>{{ order.id }}</td>
-          <td>{{ order.food.name }}</td>
-          <td>{{ order.quantity }}</td>
-          <td>{{ order.totalPrice | currency }}</td>
-          <td>{{ order.status }}</td>
-        </tr>
-      </tbody>
-    </table>
+  <div class="order-summary">
+    <h3>Order Summary</h3>
+    <ul>
+      <li *ngFor="let item of orderItems">
+        {{ item.food?.name }} - {{ item.quantity }} x ${{ item.food?.price }} = ${{ item.quantity! * item.food?.price! }}
+      </li>
+    </ul>
+    <p><strong>Total Price:</strong> ${{ order.totalPrice }}</p>
+    <button class="btn btn-success" (click)="placeOrder()">Place Order</button>
   </div>
 </div>

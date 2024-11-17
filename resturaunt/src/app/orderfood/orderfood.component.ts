@@ -1,30 +1,22 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FoodModel } from '../model/food.model';
 import { FoodService } from '../service/food.service';
 import { OrderService } from '../service/order.service';
 import { Router } from '@angular/router';
 import { OrderModel } from '../model/order.model';
 import { AuthService } from '../service/auth.service';
-import { User } from '../model/user.model';
+import { OrderItemModel } from '../model/orderdetails.model';
 
 @Component({
   selector: 'app-orderfood',
   templateUrl: './orderfood.component.html',
-  styleUrl: './orderfood.component.css'
+  styleUrls: ['./orderfood.component.css'] // Corrected the property name
 })
-export class OrderfoodComponent {
+export class OrderfoodComponent implements OnInit {
 
-  foodList: FoodModel[] = [];  // To store available food items
-  cart: { food: FoodModel, quantity: number }[] = [];  // Cart to store selected food items and quantities
-  totalPrice: number = 0;  // Total price of the order
-  user: User = new User()  // To store the logged-in user details
-  orderList: OrderModel[] = [];
-
-  userId!: number;
-
-  staff!: any;
-
-
+  order: OrderModel = new OrderModel(); // To save the order
+  foodList: FoodModel[] = []; // To store available food items
+  orderItems: OrderItemModel[] = []; // To store selected food items with quantities
 
   constructor(
     private foodService: FoodService,
@@ -34,37 +26,11 @@ export class OrderfoodComponent {
   ) { }
 
   ngOnInit(): void {
-    // let currentUser = this.authService.getUser();    
-
-    // if (currentUser != null && currentUser.id != null) {
-    //   this.user = currentUser;
-
-
-    // }
-
-    let currentUser = this.authService.getUser();
-
-    if (currentUser != null && currentUser.id != null) {
-      this.user = currentUser;
-
-      // Now you can access specific details of the user like this:
-      console.log('User ID:', currentUser.id);
-      console.log('User Name:', currentUser.name);
-      console.log('User Email:', currentUser.email);
-      console.log('User Role:', currentUser.role);
-
-      // If needed, you can assign these details to component properties:
-      this.userId = currentUser.id;
-
-
-
-    } else {
-      console.log('No user is currently logged in.');
-    }
-
-
     this.loadFoods();
-    this.loadOrderList(); // Load previous orders if any
+    const user = this.authService.getUser(); // Assuming getUser() returns the current user
+    if (user) {
+      this.order.user = user; // Set the user in the order
+    }
   }
 
   loadFoods(): void {
@@ -73,132 +39,61 @@ export class OrderfoodComponent {
     });
   }
 
-  addToCart(food: FoodModel): void {
-    const existingItem = this.cart.find(item => item.food.id === food.id);
-    if (existingItem) {
-      existingItem.quantity += 1;
+  // Increment quantity for a food item
+  incrementQuantity(food: FoodModel): void {
+    let orderItem = this.orderItems.find(item => item.food?.id === food.id);
+
+    if (!orderItem) {
+      orderItem = new OrderItemModel();
+      orderItem.food = food;
+      orderItem.quantity = 1;
+      this.orderItems.push(orderItem);
     } else {
-      this.cart.push({ food, quantity: 1 });
+      orderItem.quantity! += 1;
     }
-    this.calculateTotalPrice();
+
+    this.updateOrder();
   }
 
-  removeFromCart(foodId: number): void {
-    this.cart = this.cart.filter(item => item.food.id !== foodId);
-    this.calculateTotalPrice();
-  }
+  // Decrement quantity for a food item
+  decrementQuantity(food: FoodModel): void {
+    const orderItem = this.orderItems.find(item => item.food?.id === food.id);
 
-  updateQuantity(foodId: number, quantity: number): void {
-    const item = this.cart.find(item => item.food.id === foodId);
-    if (item) {
-      item.quantity = quantity;
-      this.calculateTotalPrice();
+    if (orderItem) {
+      if (orderItem.quantity! > 1) {
+        orderItem.quantity! -= 1;
+      } else {
+        this.orderItems = this.orderItems.filter(item => item.food?.id !== food.id);
+      }
+
+      this.updateOrder();
     }
   }
 
-  calculateTotalPrice(): void {
-    this.totalPrice = this.cart.reduce((acc, item) => acc + item.food.price * item.quantity, 0);
+  // Update the order with the current order items
+  private updateOrder(): void {
+    this.order.orderItems = this.orderItems;
+    this.order.totalPrice = this.orderItems.reduce((sum, item) => {
+      return sum + (item.food?.price || 0) * (item.quantity || 0);
+    }, 0);
   }
 
-  //   placeOrder(): void {
-  //     this.cart.forEach(item => {
-  //       const newOrder: OrderModel = {
-
-  //         id: 0, // Set to 0 or leave out if backend will generate it
-  //         user: this.user,
-  //         food: item.food,
-  //         quantity: item.quantity,
-  //         totalPrice: item.food.price * item.quantity,
-  //         status: 'PENDING', // Initial status
-  //         notes: '', // Initial empty notes
-  //         admin: this.user, // Assuming no admin by default
-  //         staff:  this.staff// Assuming no staff by default
-  //       };
-
-  //       this.orderService.createOrder(newOrder).subscribe((order) => {
-  //         this.orderList.push(order); // Add the new order to the order list
-  //       });
-  //     });
-  //     this.cart = []; // Clear cart after placing the order
-  //     this.calculateTotalPrice();
-  //   }
-
-  loadOrderList(): void {
-    this.orderService.getOrdersByUserId(this.userId).subscribe((orders) => {
-      this.orderList = orders;
+  // Save the order (navigate or send to backend)
+  placeOrder(): void {
+    //console.log(this.order);
+    this.orderService.createOrder(this.order).subscribe((response) => {
+      console.log('Order placed successfully!', response);
+      this.router.navigate(['/orderlist']); // Redirect after placing order
     });
   }
 
-
-  placeOrder(): void {
-    if (this.cart.length === 0) {
-      console.log('Cart is empty. Add items before placing an order.');
-      return;
-    }
-
-    // Prepare the order details object
-    const orderDetails = {
-      id: 0,
-      user: {
-        id: this.user.id,
-        name: this.user.name,
-        email: this.user.email
-      },
-      orderDate: new Date().toISOString(),  // Format the date to ISO 8601
-      finalPrice: this.totalPrice,
-    };
-
-    // Prepare the orders array from the cart
-    const orders = this.cart.map(item => ({
-      id: 0,  // Will be generated by the backend
-      user: {
-        id: this.user.id,
-        name: this.user.name
-      },
-      food: {
-        id: item.food.id,
-        name: item.food.name,
-        price: item.food.price
-      },
-      quantity: item.quantity,
-      totalPrice: item.food.price * item.quantity,
-      status: 'PENDING',  // Default status
-      // Optional notes from the cart item
-      admin: this.user,
-      staff: this.user
-    }));
-
-    console.log('Order Details:', orderDetails);
-    console.log('Orders:', orders);
-
-
-    // Combine order details and orders into a single payload
-    // const payload = {
-    //   orderDetails: orderDetails,
-    //   orders: orders
-    // };
-
-    // Call the order service to create the order
-    this.orderService.createOrderDetailsWithOrders(orderDetails, orders).subscribe(
-      (response) => {
-        console.log('Order placed successfully:', response);
-        // Clear the cart after successful order placement
-        this.cart = [];
-        this.calculateTotalPrice();
-      },
-      (error) => {
-        console.error('Error placing the order:', error);
-      }
-    );
+  isFoodSelected(foodId: number): boolean {
+    return !!this.orderItems.find(item => item.food?.id === foodId);
   }
 
-
-
-
-
-
-
-
+  getFoodQuantity(foodId: number): number {
+    const orderItem = this.orderItems.find(item => item.food?.id === foodId);
+    return orderItem?.quantity || 0;
+  }
+  
 }
-
-

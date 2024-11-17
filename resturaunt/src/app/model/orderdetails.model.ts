@@ -1,9 +1,9 @@
-import { OrderModel } from "./order.model";
+import { FoodModel } from "./food.model";
 
-export class OrderDetailsModel {
+export class OrderItemModel {
 
     id!: number;
-    finalPrice!: number;
-    orders?: OrderModel[];
+    quantity?: number;
+    food?: FoodModel = new FoodModel();
 
 }

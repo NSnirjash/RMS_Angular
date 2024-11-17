@@ -3,13 +3,12 @@ import { Injectable } from '@angular/core';
 import { OrderModel } from '../model/order.model';
 import { catchError, Observable, throwError } from 'rxjs';
 import { AuthService } from './auth.service';
-import { OrderDetailsModel } from '../model/orderdetails.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class OrderService {
-  private apiUrl = 'http://localhost:8090/api/orders';
+  private apiUrl = 'http://localhost:8090/api/order';
 
   constructor(
     private http: HttpClient,
@@ -61,8 +60,8 @@ export class OrderService {
 
   
 
-  getAllOrders(): Observable<OrderModel[]> {
-    return this.http.get<OrderModel[]>(`${this.apiUrl}/all`);
+  getAllOrders(userId: number): Observable<OrderModel[]> {
+    return this.http.get<OrderModel[]>(`${this.apiUrl}/all?userId=${userId}`);
   }
 
   getOrdersByUserId(userId: number): Observable<OrderModel[]> {
