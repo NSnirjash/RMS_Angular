@@ -1,168 +1,58 @@
-/* Styling for the food cards */
+.food-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  justify-content: center;
+}
 
-.card {
-  border: 2px solid #e20404;
+.food-card {
   border-radius: 10px;
-  background-color: #1e1e1e;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden;
+  background-color: #f9f9f9;
+  transition: transform 0.3s, box-shadow 0.3s;
 }
 
-.card:hover {
+.food-card:hover {
   transform: scale(1.05);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.7);
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
 }
 
-.card-img-top {
-  height: 250px;
+.food-image {
+  height: 200px;
   object-fit: cover;
-  border-radius: 10px 10px 0 0;
-}
-
-.card-body {
-  text-align: center;
-  padding: 10px;
-  background-color: #333;
 }
 
 .card-title {
-  font-weight: bold;
-  color: #ffa726; /* Orange for title */
+  font-size: 1.2rem;
 }
 
-.card-text {
-  font-size: 1.1em;
-  color: #ccc; /* Light grey for text */
+.quantity-controls {
+  margin-top: 15px;
 }
 
-.btn-primary {
-  background-color: #607d8b; /* Dark grey-blue */
-  border: none;
-  transition: background-color 0.3s ease;
+.food-quantity {
+  font-size: 1.5rem;
+  color: #333;
+  padding: 0 10px;
 }
 
-.btn-primary:hover {
-  background-color: #455a64; /* Darker shade on hover */
+.order-summary {
+  background-color: #fff;
+  border: 2px solid #e9ecef;
 }
 
-.cart-container {
-  position: sticky; /* Keep it fixed in view while scrolling */
-  top: 0; /* Position it at the top of the parent */
-  max-height: 800px; /* Adjust based on your layout */
-  overflow-y: auto; /* Enable vertical scrolling if needed */
-  z-index: 1; /* Make sure it stays above other content */
-  background-color: #343a40; /* Match your table background color */
-}
-
-.table {
-  margin-bottom: 0; /* Avoid margin at the bottom of the table */
-}
-
-/* Cart section styles */
-table {
-  background-color: rgba(30, 30, 30, 0.9); /* Slightly transparent background */
-  color: #fff; /* Text color */
-  padding: 20px; /* Padding inside the cart */
-  border-radius: 10px; /* Rounded corners */
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5); /* Shadow effect */
-  max-height: 80%; /* Limit the height */
-  overflow-y: auto; /* Enable vertical scrolling */
-}
-
-thead th {
-  background-color: #212121; /* Very dark grey */
-  color: #ffa726; /* Orange text */
-  padding: 10px;
-  text-align: left;
-}
-
-tbody td {
-  padding: 10px;
-  border-bottom: 1px solid #333; /* Darker border */
-}
-
-input[type="number"] {
-  width: 60px;
-  padding: 5px;
-  background-color: #444;
-  color: #fff;
-  border-radius: 5px;
-  border: 1px solid #555; /* Lighter border */
-  text-align: center;
-}
-
-.btn-success {
-  background-color: #388e3c; /* Dark green */
-  border: none;
-  padding: 10px 20px;
-  border-radius: 20px;
-  font-weight: bold;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-.btn-success:hover {
-  background-color: #2e7d32; /* Darker green on hover */
-  transform: scale(1.05);
-}
-
-/* General Layout */
-/* .container {
-  padding: 20px;
-  background-color: #f7f0f0; 
-  border-radius: 15px;
-  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.925);  */
-
-h2, h3 {
-  color: #050505; /* Orange headings */
-  text-align: center;
-  font-weight: bold;
+.order-summary h3 {
   margin-bottom: 20px;
 }
 
-h3 {
-  margin-top: 40px;
+.list-group-item {
+  font-size: 1rem;
 }
 
-p {
-  font-size: 1.1em;
-  color: #b0bec5; /* Light grey for paragraphs */
+.btn {
+  transition: background-color 0.3s, color 0.3s;
 }
 
-table {
-  border-radius: 10px;
-  overflow: hidden;
-}
-
-tfoot td {
-  font-weight: bold;
-  color: #4caf50; /* Green for total price */
-}
-
-tfoot td:last-child {
-  text-align: right;
-}
-
-input[type="number"]:focus {
-  outline: none;
-  border-color: #ffa726; /* Orange on focus */
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-  .card-img-top {
-    height: 150px;
-  }
-
-  .btn-primary {
-    padding: 5px 10px;
-  }
-
-  .btn-success {
-    width: 100%;
-    padding: 10px 0;
-    margin-top: 10px;
-  }
-
-  table {
-    font-size: 0.9em;
-  }
+.btn:hover {
+  opacity: 0.9;
 }
