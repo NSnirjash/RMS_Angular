@@ -83,6 +83,10 @@ export class AuthService {
     );
   }
 
+  getAllUsers(): Observable<User[]> {
+    return this.http.get<User[]>(`${this.baseUrl}/getAllUsers`);
+  }
+
   getAllWaiters(): Observable<User[]> {
     return this.http.get<User[]>(`${this.baseUrl}/getAllWaiters`);
   }
