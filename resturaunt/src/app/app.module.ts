@@ -23,6 +23,7 @@ import { OrderfoodComponent } from './orderfood/orderfood.component';
 import { ApproveorderComponent } from './approveorder/approveorder.component';
 import { ViewallfoodComponent } from './food/viewallfood/viewallfood.component';
 import { OrderlistComponent } from './orderlist/orderlist.component';
+import { BillComponent } from './bill/bill.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { OrderlistComponent } from './orderlist/orderlist.component';
     ApproveorderComponent,
     ViewallfoodComponent,
     OrderlistComponent,
+    BillComponent,
 
   ],
   imports: [
