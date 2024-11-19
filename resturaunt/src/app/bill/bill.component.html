@@ -1,1 +1,66 @@
-<p>bill works!</p>
+<div class="container mt-5">
+    <h2>Approved Orders</h2>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Order ID</th>
+          <th>User</th>
+          <th>Total Price</th>
+          <th>Notes</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let order of approvedOrders">
+          <td>{{ order.id }}</td>
+          <td>{{ order.user.name }}</td>
+          <td>{{ order.totalPrice }}</td>
+          <td>{{ order.notes }}</td>
+          <td>
+            <button class="btn btn-primary" (click)="createBill(order.id)">Create Bill</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  
+    <h2 class="mt-5">Bills</h2>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Bill ID</th>
+          <th>Order ID</th>
+          <th>Total Amount</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let bill of bills">
+          <td>{{ bill.id }}</td>
+          <td>{{ bill.order.id }}</td>
+          <td>{{ bill.totalAmount }}</td>
+          <td>{{ bill.status }}</td>
+          <td>
+            <ng-container [ngSwitch]="bill.status">
+              <button
+                *ngSwitchCase="'UNPAID'"
+                class="btn btn-success"
+                (click)="payBill(bill.id)"
+              >
+                Pay Bill
+              </button>
+              <button
+                *ngSwitchCase="'GIVEN'"
+                class="btn btn-warning"
+                (click)="confirmBill(bill.id)"
+              >
+                Confirm Payment
+              </button>
+              <span *ngSwitchCase="'PAID'" class="text-success">Paid</span>
+            </ng-container>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
