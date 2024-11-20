@@ -12,3 +12,4 @@ export class BillModel {
     order: OrderModel = new OrderModel(); // Associated OrderDetails for this bill
 
 }
+

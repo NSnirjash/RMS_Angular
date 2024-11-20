@@ -10,9 +10,6 @@ import { User } from '../model/user.model';
   providedIn: 'root'
 })
 export class AuthService {
-  getAdminId(): number {
-    throw new Error('Method not implemented.');
-  }
   private baseUrl = 'http://localhost:8090';
   private headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 

@@ -4,6 +4,7 @@ import { User } from '../model/user.model';
 import { AuthService } from '../service/auth.service';
 import { OrderService } from '../service/order.service';
 import { Role } from '../model/Role.model';
+import { BillService } from '../service/bill.service';
 
 @Component({
   selector: 'app-orderlist',
@@ -19,7 +20,8 @@ export class OrderlistComponent implements OnInit {
 
   constructor(
     private orderService: OrderService,
-    private authService: AuthService
+    private authService: AuthService,
+    private billService: BillService // Inject BillService
   ) { }
 
   ngOnInit(): void {
@@ -81,5 +83,23 @@ export class OrderlistComponent implements OnInit {
   // Calculate the total quantity of items in an order
   getTotalQuantity(order: OrderModel): number {
     return order.orderItems.reduce((total, item) => total + (item.quantity || 0), 0);
+  }
+
+   // Create bill for an approved order
+   createBill(orderId: number): void {
+    if (this.user && this.isAdmin()) {
+      this.billService.createBill(orderId, this.user.id).subscribe(
+        (bill) => {
+          alert(`Bill created successfully with ID: ${bill.id}`);
+          this.loadOrderList(); // Reload orders to reflect changes
+        },
+        (error) => {
+          console.error('Error creating bill:', error);
+          alert('Failed to create bill. Please try again.');
+        }
+      );
+    } else {
+      alert('Only admins can create bills.');
+    }
   }
 }

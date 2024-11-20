@@ -14,6 +14,7 @@ import { OrderfoodComponent } from './orderfood/orderfood.component';
 import { ApproveorderComponent } from './approveorder/approveorder.component';
 import { ViewallfoodComponent } from './food/viewallfood/viewallfood.component';
 import { OrderlistComponent } from './orderlist/orderlist.component';
+import { BillComponent } from './bill/bill.component';
 
 const routes: Routes = [
   {path: "register" , component: RegisterComponent},
@@ -30,6 +31,7 @@ const routes: Routes = [
   {path: "orderfood" , component: OrderfoodComponent},
   {path: "orderlist" , component: OrderlistComponent},
   {path: "orderapprove" , component: ApproveorderComponent},
+  {path: "bills" , component: BillComponent},
 
 
 ];

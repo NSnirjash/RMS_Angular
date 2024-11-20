@@ -10,73 +10,68 @@ import { AuthService } from '../service/auth.service';
   templateUrl: './bill.component.html',
   styleUrl: './bill.component.css'
 })
-export class BillComponent implements OnInit{
-  
-  approvedOrders: OrderModel[] = [];
-  bills: BillModel[] = [];
-  selectedOrderId!: number;
-  userId!: number;
-  adminId!: number;
+export class BillComponent implements OnInit {
+  approvedOrders: OrderModel[] = []; // Orders with APPROVED status
+  userId!: number; // Logged-in user ID
+  adminId!: number; // Logged-in admin ID
+  isAdmin: boolean = false; // Role check for admin
+
+
 
   constructor(
     private billService: BillService,
     private orderService: OrderService,
     private authService: AuthService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
-    throw new Error('Method not implemented.');
-  }
+    // Fetch user details
+    const user = this.authService.getUser();
+    this.userId = user?.id ?? 0;
+    this.adminId = user?.id ?? 0;
+    // this.isAdmin = user?.role === 'ADMIN';
 
-  ngOnInit(): void {
-    this.userId = this.authService.getUserId(); // Assuming userId is fetched via AuthService
-    this.adminId = this.authService.getAdminId(); // Assuming adminId is fetched via AuthService
+    // Load approved orders
     this.loadApprovedOrders();
-    this.loadBills();
   }
 
+
+
+  // Fetch approved orders
+  // Fetch approved orders
   loadApprovedOrders(): void {
     this.orderService.getOrdersByUserId(this.userId).subscribe(
       (orders) => {
-        this.approvedOrders = orders.filter((order) => order.status === 'APPROVED');
+        this.approvedOrders = orders.filter(order => order.status === 'APPROVED');
       },
       (error) => console.error('Error fetching approved orders:', error)
     );
   }
 
+  // Fetch all bills
   loadBills(): void {
-    // Add logic to fetch bills if needed
+
   }
 
-  createBill(orderId: number): void {
+  // Create a bill for an order (Admin-only)
+  // Confirm bill for an order (Admin-only)
+  confirmBill(orderId: number): void {
+    if (!this.isAdmin) {
+      alert('Only admins can confirm bills.');
+      return;
+    }
     this.billService.createBill(orderId, this.adminId).subscribe(
       (bill) => {
-        alert('Bill created successfully!');
-        this.loadApprovedOrders(); // Refresh orders
-        this.bills.push(bill); // Add the new bill
+        this.billService.confirmBill(bill.id, this.adminId).subscribe(
+          () => {
+            alert('Bill confirmed successfully!');
+            this.loadApprovedOrders(); // Refresh approved orders
+          },
+          (error) => console.error('Error confirming bill:', error)
+        );
       },
       (error) => console.error('Error creating bill:', error)
     );
   }
-
-  payBill(billId: number): void {
-    this.billService.payBill(billId).subscribe(
-      (bill) => {
-        alert('Bill paid successfully!');
-        this.loadBills(); // Refresh bills
-      },
-      (error) => console.error('Error paying bill:', error)
-    );
-  }
-
-  confirmBill(billId: number): void {
-    this.billService.confirmBill(billId, this.adminId).subscribe(
-      (bill) => {
-        alert('Bill confirmed successfully!');
-        this.loadBills(); // Refresh bills
-      },
-      (error) => console.error('Error confirming bill:', error)
-    );
-  }
-
 }
+
