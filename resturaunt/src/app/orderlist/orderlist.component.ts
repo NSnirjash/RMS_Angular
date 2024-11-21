@@ -5,6 +5,7 @@ import { AuthService } from '../service/auth.service';
 import { OrderService } from '../service/order.service';
 import { Role } from '../model/Role.model';
 import { BillService } from '../service/bill.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-orderlist',
@@ -21,7 +22,8 @@ export class OrderlistComponent implements OnInit {
   constructor(
     private orderService: OrderService,
     private authService: AuthService,
-    private billService: BillService // Inject BillService
+    private billService: BillService, // Inject BillService
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -101,5 +103,41 @@ export class OrderlistComponent implements OnInit {
     } else {
       alert('Only admins can create bills.');
     }
+  }
+
+  payBill(billId: number): void {
+    this.billService.payBill(billId).subscribe(
+      (bill) => {
+        alert(`Bill paid successfully. Status changed to GIVEN.`);
+        this.loadOrderList();
+      },
+      (error) => {
+        console.error('Error paying bill:', error);
+        alert('Failed to pay bill. Please try again.');
+      }
+    );
+  }
+
+  // Confirm the bill
+  confirmBill(billId: number): void {
+    if (this.user && this.isAdmin()) {
+      this.billService.confirmBill(billId, this.user.id).subscribe(
+        (bill) => {
+          alert(`Bill confirmed successfully. Status changed to PAID.`);
+          this.loadOrderList();
+          this.router.navigate(['/bill', bill.id]);
+        },
+        (error) => {
+          console.error('Error confirming bill:', error);
+          alert('Failed to confirm bill. Please try again.');
+        }
+      );
+    }
+  }
+
+
+  // Navigate to bill details page
+  viewBillDetails(billId: number): void {
+    this.router.navigate(['/bill-details', billId]);
   }
 }

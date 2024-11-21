@@ -4,6 +4,8 @@ import { BillModel } from '../model/bill.model';
 import { BillService } from '../service/bill.service';
 import { OrderService } from '../service/order.service';
 import { AuthService } from '../service/auth.service';
+import { ActivatedRoute, Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-bill',
@@ -11,67 +13,61 @@ import { AuthService } from '../service/auth.service';
   styleUrl: './bill.component.css'
 })
 export class BillComponent implements OnInit {
-  approvedOrders: OrderModel[] = []; // Orders with APPROVED status
-  userId!: number; // Logged-in user ID
-  adminId!: number; // Logged-in admin ID
-  isAdmin: boolean = false; // Role check for admin
+  billId!: number;
+  bill: BillModel | null = null;
+  order: OrderModel | null = null; 
 
 
 
   constructor(
-    private billService: BillService,
+    private route: ActivatedRoute,
     private orderService: OrderService,
-    private authService: AuthService
+    private billService: BillService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
-    // Fetch user details
-    const user = this.authService.getUser();
-    this.userId = user?.id ?? 0;
-    this.adminId = user?.id ?? 0;
-    // this.isAdmin = user?.role === 'ADMIN';
-
-    // Load approved orders
-    this.loadApprovedOrders();
+    // Extract bill ID from the route and fetch details
+    this.billId = Number(this.route.snapshot.paramMap.get('billId'));
+    this.getBillDetails();
   }
 
 
 
-  // Fetch approved orders
-  // Fetch approved orders
-  loadApprovedOrders(): void {
-    this.orderService.getOrdersByUserId(this.userId).subscribe(
-      (orders) => {
-        this.approvedOrders = orders.filter(order => order.status === 'APPROVED');
+  getBillDetails(): void {
+    // Fetch the bill details first
+    this.billService.getBillById(this.billId).subscribe(
+      (bill) => {
+        this.bill = bill;
+        console.log('Full Bill Details:', this.bill);
+        console.log('Paid By:', bill.paidBy);
+        console.log('Received By:', bill.receivedBy);
+
+        // Ensure bill has an order ID before calling getOrderDetails
+        if (bill.order && bill.order.id) {
+          this.getOrderDetails(bill.order.id);  // Fetch order if the ID is valid
+        } else {
+          console.error('No order ID found in the bill.');
+          alert('No order found for this bill.');
+        }
       },
-      (error) => console.error('Error fetching approved orders:', error)
+      (error) => {
+        console.error('Error fetching bill details:', error);
+        alert('Failed to load bill details.');
+      }
     );
   }
 
-  // Fetch all bills
-  loadBills(): void {
-
-  }
-
-  // Create a bill for an order (Admin-only)
-  // Confirm bill for an order (Admin-only)
-  confirmBill(orderId: number): void {
-    if (!this.isAdmin) {
-      alert('Only admins can confirm bills.');
-      return;
-    }
-    this.billService.createBill(orderId, this.adminId).subscribe(
-      (bill) => {
-        this.billService.confirmBill(bill.id, this.adminId).subscribe(
-          () => {
-            alert('Bill confirmed successfully!');
-            this.loadApprovedOrders(); // Refresh approved orders
-          },
-          (error) => console.error('Error confirming bill:', error)
-        );
+  getOrderDetails(orderId: number): void {
+    this.orderService.getOrderById(orderId).subscribe(
+      (order) => {
+        this.order = order;
+        console.log('Order Details:', this.order);  // Log the fetched order details
       },
-      (error) => console.error('Error creating bill:', error)
+      (error) => {
+        console.error('Error fetching order details:', error);
+        alert('Failed to load order details.');
+      }
     );
   }
 }
-

@@ -31,7 +31,7 @@ const routes: Routes = [
   {path: "orderfood" , component: OrderfoodComponent},
   {path: "orderlist" , component: OrderlistComponent},
   {path: "orderapprove" , component: ApproveorderComponent},
-  {path: "bills" , component: BillComponent},
+  {path: "bill/:billId" , component: BillComponent},
 
 
 ];
