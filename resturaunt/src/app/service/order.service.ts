@@ -72,6 +72,10 @@ export class OrderService {
     return this.http.get<OrderModel>(`${this.apiUrl}/${id}`);
   }
 
+  getOrderByBillId(id: number): Observable<OrderModel> {
+    return this.http.get<OrderModel>(`${this.apiUrl}/getOrderByBillId?billId=${id}`);
+  }
+
   updateOrderStatus(id: number, status: string): Observable<OrderModel> {
     const headers = this.getAuthHeaders();
     return this.http.put<OrderModel>(`${this.apiUrl}/update/${id}?status=${status}`, {}, { headers })

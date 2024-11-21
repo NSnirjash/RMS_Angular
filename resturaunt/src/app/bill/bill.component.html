@@ -15,16 +15,16 @@
           <h5>Order Details</h5>
           <p><strong>Order ID:</strong> {{ order.id }}</p>
           <p><strong>Total Price:</strong> {{ order.totalPrice | currency }}</p>
-          <p><strong>Status:</strong> {{ order.status }}</p>
+          <p><strong>Items:</strong> {{ order.orderItems }}</p>
         </div>
         <hr />
 
         <!-- User Details -->
         <h5>User Details</h5>
-        <p><strong>Paid By:</strong> {{ bill.paidBy?.name }}</p>
-        <p><strong>Contact:</strong> {{ bill.paidBy?.phone || 'N/A' }}</p>
-        <p><strong>Email:</strong> {{ bill.paidBy?.email || 'N/A' }}</p>
-        <p><strong>Address:</strong> {{ bill.paidBy?.address || 'N/A' }}</p>
+        <p><strong>Paid By:</strong> {{ bill.paidBy.name }}</p>
+        <p><strong>Contact:</strong> {{ bill.paidBy.phone || 'N/A' }}</p>
+        <p><strong>Email:</strong> {{ bill.paidBy.email || 'N/A' }}</p>
+        <p><strong>Address:</strong> {{ bill.paidBy.address || 'N/A' }}</p>
         <hr />
 
         <!-- Admin Details -->

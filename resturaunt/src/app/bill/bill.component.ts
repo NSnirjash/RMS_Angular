@@ -35,17 +35,11 @@ export class BillComponent implements OnInit {
 
 
   getBillDetails(): void {
-    // Fetch the bill details first
     this.billService.getBillById(this.billId).subscribe(
       (bill) => {
         this.bill = bill;
-        console.log('Full Bill Details:', this.bill);
-        console.log('Paid By:', bill.paidBy);
-        console.log('Received By:', bill.receivedBy);
-
-        // Ensure bill has an order ID before calling getOrderDetails
-        if (bill.order && bill.order.id) {
-          this.getOrderDetails(bill.order.id);  // Fetch order if the ID is valid
+        if (bill.id) {
+          this.getOrderDetails(bill.id);
         } else {
           console.error('No order ID found in the bill.');
           alert('No order found for this bill.');
@@ -58,11 +52,11 @@ export class BillComponent implements OnInit {
     );
   }
 
-  getOrderDetails(orderId: number): void {
-    this.orderService.getOrderById(orderId).subscribe(
+  getOrderDetails(billId: number): void {
+    this.orderService.getOrderByBillId(billId).subscribe(
       (order) => {
         this.order = order;
-        console.log('Order Details:', this.order);  // Log the fetched order details
+        console.log('Order Details:', this.order);
       },
       (error) => {
         console.error('Error fetching order details:', error);
