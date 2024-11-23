@@ -138,6 +138,6 @@ export class OrderlistComponent implements OnInit {
 
   // Navigate to bill details page
   viewBillDetails(billId: number): void {
-    this.router.navigate(['/bill-details', billId]);
+    this.router.navigate(['/bill', billId]);
   }
 }

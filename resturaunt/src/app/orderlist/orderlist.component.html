@@ -66,6 +66,7 @@
                     <th *ngIf="isAdmin()">Waiter</th>
                     <th *ngIf="isAdmin()">Actions</th>
                     <th>Bill Actions</th>
+                    <th>View Bill</th>
                 </tr>
             </thead>
             <tbody>
@@ -115,6 +116,14 @@
                         <button *ngIf="isAdmin() && order.bill?.status === 'GIVEN'"
                             class="btn btn-success btn-sm" (click)="confirmBill(order.bill!.id)">
                             Confirm Bill
+                        </button>
+                    </td>
+                    <td>
+                        <!-- Navigate to Bill Details -->
+                        <button *ngIf="order.bill?.status === 'PAID'" 
+                            class="btn btn-info btn-sm" 
+                            (click)="viewBillDetails(order.bill!.id)">
+                            View Bill
                         </button>
                     </td>
                 </tr>
