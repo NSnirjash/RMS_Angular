@@ -39,7 +39,7 @@ There are 3 types of users in the system
 - Waiter
 - User
 
-## Technologies used:-
+## Technologies used
 
 ### Front-End Development:
 - [<img src="https://github.com/fatemazohor/fatemazohor/blob/main/svg/html5.svg" width="40" height="40">](https://github.com/NSnirjash) - [<img src="https://github.com/fatemazohor/fatemazohor/blob/main/svg/css3.svg" width="40" height="40">](https://github.com/NSnirjash) - [<img src="https://github.com/fatemazohor/fatemazohor/blob/main/svg/bootstrap-logo-shadow.png" width="40" height="40">](https://github.com/NSnirjash)- [<img src="https://github.com/fatemazohor/fatemazohor/blob/main/svg/javascript.svg" width="40" height="40">](https://github.com/NSnirjash)- [<img src="https://github.com/fatemazohor/fatemazohor/blob/main/svg/angular.svg" width="40" height="40">](https://github.com/NSnirjash)-[<img src="https://www.typescriptlang.org/icons/icon-48x48.png?v=4" width="40" height="40">](https://github.com/NSnirjash)- [<img src="https://img.icons8.com/windows/32/font-awesome.png" width="40" height="40">](https://github.com/NSnirjash)
