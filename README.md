@@ -7,9 +7,8 @@ Welcome to the Restaurant Management System project built with **Spring Boot** f
 - [Features](#features)
 - [Role](#role)
 - [Technologies Used](#technologies-used)
+- [Softwares](#softwares)
 - [Project Preview](#project-preview)
-- [Installation](#installation)
-- [Role-based Access](#role-based-access)
 
 -----------------   ---------------------------------------------
 
