@@ -1,9 +1,40 @@
-# MerchandiseManagementERP-Angular-SpringBoot
+# Restaurant Management System - (Angular & SpringBoot)
 
-The Merchandise Management ERP System is a comprehensive web application designed to streamline the processes involved in inventory and order management, enhance supplier tracking efficiency, and ensure effective role-based user management. This system aims to provide businesses with the tools necessary to optimize their operational efficiency, reduce costs, and improve customer satisfaction through an intuitive and responsive interface.
+Welcome to the Restaurant Management System project built with **Spring Boot** for the backend and **Angular** for the frontend! This project aims to provide a foundation for managing restaurant operations using modern web technologies.
+
+## Table of Contents
+- [Overview](#overview)
+- [Features](#features)
+- [Role](#role)
+- [Technologies Used](#technologies-used)
+- [Project Preview](#project-preview)
+- [Installation](#installation)
+- [Role-based Access](#role-based-access)
+
 -----------------   ---------------------------------------------
-## There are 2 types of users in the system
 
+## Overview
+
+This Restaurant Management System allows users (customers) and administrators (managers) to interact with the restaurant system in a seamless and efficient manner. The system includes features like menu management, order processing, reservation management, bill management, role-based access control, and more.
+
+The application is divided into two main parts:
+1. **Backend**: Developed using **Spring Boot**, which handles the server-side logic, REST APIs, and database interactions.
+2. **Frontend**: Developed using **Angular**, providing a user-friendly interface for the bank's clients and administrators.
+
+## Features
+
+- **User Registration and Login**: New users can sign up, and existing users can log in to access their accounts.
+- **Active Account by Email**: To the inactive users email will be sent to their email address. by clicking the link in the email, users will be able to activate their account.
+- **Menu Management**: Administrators can create, update, and delete menu items. Users can view the menu and explore available dishes.
+- **Order Processing**: Users can place orders online, and administrators can track and manage order statuses (e.g., pending, in-progress, completed).
+- **Reservation Management**: Users can book tables for specific dates and times, while administrators can manage and confirm reservations.
+- **Bill Management**: Users can view and pay their bills online. Administrators can generate and manage bills for orders and reservations.
+- **Role-based Access Control**: Separate access for users and administrators. Users have access to customer-focused actions like ordering and reservations, while administrators can manage menu items, orders, and billing.
+
+
+## Role
+
+There are 3 types of users in the system
 - Admin
 - Waiter
 - User
@@ -23,6 +54,7 @@ The Merchandise Management ERP System is a comprehensive web application designe
 - [<img src="https://www.oracle.com/a/ocom/img/cb71-java-logo.png" width="50" height="50">](https://github.com/NSnirjash)
 
 
+## Softwares 
 
 **==== Software And Tools Required ======**
 - :  MySQL
@@ -33,15 +65,15 @@ The Merchandise Management ERP System is a comprehensive web application designe
 - :  Git & GitHub
 - :  Postman
 
+## Dummy Database Initialization USING QUERY
 
-**================= Dummy Database Initialization USING QUERY =================**  
 STEP 1: Open MySQL Command Prompt or MySQL Workbench
 
 STEP 2: Log in to the administrator user as MySQL -u <username> -p (Enter Password if asked)
 
 STEP 3: Use MySQL workbench to import data from the dump folder and SQL file.
 
-Project Preview.
+Project Preview
 ---------------------------------------------------------------------
 :pushpin: Login page for Admin And User:
 ![Screenshot 2024-11-25 004300](https://github.com/user-attachments/assets/e63b5900-5bbd-48f2-8e49-7f3c84f4f57e)
@@ -76,5 +108,5 @@ Project Preview.
 **"Suggestions and project Improvements are always Invited!"**  
 Thanks a lot,    
 Project Leader  
-[Md Nayamul Islam](https://github.com/NSnirjash)
+[Md Nasif Shahriar](https://github.com/NSnirjash)
 
